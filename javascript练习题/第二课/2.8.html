@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>the canlendar</title>
+<style type="text/css">
+body,ul,li,p,h2{
+	padding: 0;
+	margin:0;
+}
+body{font:12px/1.5 微软雅黑;}
+#calendar{
+	width:248px;
+	background:#eaeaea;
+	margin:10px auto;  /*使div在页面中间*/
+	padding:0 0 10px 10px;
+}
+#calendar li{
+	color:#fff;
+	background:#424242;
+	float:left;
+	width:40px;
+	height:40px;
+	cursor:pointer;  /*当鼠标移上去的样式*/
+	font-size:14px;
+	text-align:center;
+	line-height:1.3;
+	list-style-type:none;
+	border:1px solid #424242;
+	margin:10px 10px 0 0;
+	padding:5px;
+}
+#calendar ul{
+	overflow:hidden;  /*使两个div分开*/
+}
+#calendar li.current{
+	color:#F69;
+	background:#fff;
+}
+#calendar li strong{
+	display:block;   /*单个日历的样式*/
+	font-size:18px;
+}
+#mes{
+	color:#666;
+	background:#f1f1f1;
+	border:1px solid #fff;
+	margin:10px 10px 0 0;  /*显示节日的白线框*/
+	padding:5px;
+}
+#mes h2{font-size:14px;}
+</style>
+<script type="text/javascript">
+window.onload = function ()
+{
+	var oArr = document.getElementById("calendar").getElementsByTagName("li");
+	var oBrr = document.getElementById("mes");
+	var oCrr = oBrr.getElementsByTagName("p")[0];
+	var oDrr = oBrr.getElementsByTagName("strong")[0]
+	var oErr = [
+	"元旦：1月1日至3日放假三天。",
+	"春节：2月2日至8日放假7天。",
+	"妇女节：3月8日妇女节，与我无关。",
+	"清明节：4月3日至5日放假3天",
+	"劳动节：4月30日至5月2日放假3天。",
+	"端午节：6月4日至6日放假3天。",
+	"小暑：7月7日小暑。不放假。",
+	"七夕节：8月6日七夕节。不放假。",
+	"中秋节：9月10日至12日放假3天。",
+	"国庆节：10月1日至7日放假7天。",
+	"立冬：11月8日立冬。不放假。",
+	"艾滋病日:12月1日<br />废除奴隶制国际日:12月2日。"
+	];
+	for(var i = 0; i < oArr.length; i++)
+	{
+		oArr[i].index = i;
+		oArr[i].onmouseover = function ()
+		{
+			for(var n = 0;n < oArr.length; n++)  oArr[n].className = "";
+				this.className = "current";
+			oCrr.innerHTML = oErr[this.index];
+			oDrr.innerHTML = this.index + 1;
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<div id="calendar">
+		<ul>
+			<li><strong>1</strong>JAN</li>
+            <li><strong>2</strong>FER</li>
+            <li><strong>3</strong>MAR</li>
+            <li><strong>4</strong>APR</li>
+            <li><strong>5</strong>MAY</li>
+            <li class="current"><strong>6</strong>JUN</li>
+            <li><strong>7</strong>JUL</li>
+            <li><strong>8</strong>AUG</li>
+            <li><strong>9</strong>SEP</li>
+            <li><strong>10</strong>OCT</li>
+            <li><strong>11</strong>NOV</li>
+            <li><strong>12</strong>DEC</li>
+		</ul>
+		<div id="mes">
+			<h2>
+				<strong>6</strong>
+				月节日
+		    </h2>
+		    <p>端午节：6月4日至6日放假3天。</p>
+		</div>
+	</div>
+</body>
+</html>

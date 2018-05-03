@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>the method of inputs</title>
+<style type="text/css">
+body,ul,li,button{
+	margin:0;
+	padding:0;
+}
+body{font:12px/1.5 微软雅黑;}
+#inputs{
+	position: absolute;
+    margin-left: 48%;
+    margin-top: 19px; 
+}
+#show{
+	margin-top:5px;  /*打开框与button的距离*/
+	background:#fff;  /*框里的背景颜色*/
+	border:1px solid #9a99ff;  /*框的边缘颜色*/
+}
+#show li{
+	width:100%;  /*线的长度*/
+	line-height:24px;  /*字体上下间距*/
+	display:inline-block;  /*框的样式*/
+	vertical-align:top;
+}
+#close{border-top:1px solid black;}  /*关闭上方的那根线的颜色*/
+#show li a{
+	color:#00c;  /*字体的颜色*/
+	padding:0 5px;
+	display:block;  /*框的格式*/
+	text-decoration:none;}  /*a标签的下划线*/
+#show li a:hover{background:#ccc;}  /*当鼠标移上去时的背景颜色*/
+</style>
+<script type="text/javascript">
+window.onload = function ()
+{
+	var oArr = document.getElementsByTagName("button")[0];
+	var oBrr = document.getElementById("show");
+	var oCrr = document.getElementById("close"); 	
+	var style = oBrr.style;
+	oArr.onclick = function()
+	{		
+		style.display = style.display == "block" ? "none" : "block"
+	};
+	oCrr.onclick = function()
+	{
+		style.display = "none"	
+	}
+}
+</script>
+</head>
+<body>
+	<div id="inputs">
+		<button>输入法</button>
+		<ul id="show">
+			<li><a href="javascript:;">拼音</a></li>
+			<li><a href="javascript:;">五笔</a></li>
+			<li id="close"><a href="javascript:;">关闭</a>
+		</ul>
+	</div>
+</body>
+<html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>agruments-Obtaining aggregate function parameters</title>
+<style type="text/css">
+pre{
+	color:green;   /*代码字体的颜色*/
+	padding:10px 15px;
+	background:#f0f0f0;
+	border:1px dotted #333;
+	font:12px/1.5 Courier New;
+}
+span{color:#999;}
+</style>
+<script type="text/javascript">
+var i = oArr = 0
+function sum ()
+{
+	for(var i = 0; i <arguments.length; i++)
+	{
+		oArr += arguments[i]
+	}
+	return oArr
+}
+alert(sum(1,2,3,4,5,6,7,8,9,10))
+</script>
+</head>
+<body>
+<pre>
+&lt;script type="text/javascript"&gt;
+    var i = iResult = 0
+    function sum()
+    {
+        for (var i = 0; i < arguments.length; i++)
+        {
+            iResult += arguments[i]
+        }
+        return iResult
+    }
+    <span>//应用</span>
+    alert(sum(1,2,3,4,5,6,7,8,9,10)) <span>//输出55</span>
+&lt;/script&gt;
+</pre>
+</body>
+</html>

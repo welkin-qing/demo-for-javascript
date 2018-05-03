@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>make three squares change color</title>
+<style>
+#div1{
+	width: 350px;
+    height: 110px;
+    margin-left: 38%;
+    margin-top: 50px;
+}
+#div1 div{
+	float:left;
+	width:100px;
+	height: 110px;
+	background-color: black;
+	margin:0 5px;  /*表示每个方块之间的间距并且是同一水平表示*/
+}
+</style>
+<script type="text/javascript">
+window.onload = function ()
+{
+	var oArr = document.getElementById("div1").getElementsByTagName("div");
+	var oBin = document.getElementsByTagName("button")[0];
+	oBin.onclick = function ()
+	{
+		for(var i=0; i < oArr.length; i++)  oArr[i].style.background = "green";  //表示改变后的颜色
+	}
+}
+</script>
+</head>
+<body>
+	<center><button>点击将方块变色</button></center>
+	<div id="div1">
+		<div></div>
+	    <div></div>
+	    <div></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>change style</title>
+<style>
+#div1{width:1000px;margin:0 auto;padding:0;text-align:center}
+#div2{width:200px;height:200px;background:black;margin:10px auto;display:block}
+</style>
+<script>
+var changeStyle = function (elem, attr, value)   //elem 某个位置  attr 对应的样式名称  value要改变的值
+{
+	elem.style[attr] = value            //这个函数是用来改变某个位置样式的值
+};
+window.onload = function ()
+  {
+    var oBa = document.getElementsByTagName("input");  
+    var oBc = document.getElementById("div2");
+    var oBd = ["width","height","background","display","display"];
+    var oBe = ["300px","300px","green","none","block"];
+    for(var i = 0; i<oBa.length; i++)
+    {
+        oBa[i].index = i;
+        oBa[i].onclick = function ()
+        {
+           this.index == oBa.length - 1 && (oBc.style.cssText = "");  //cssText返回作为字符串的样式声明的内容
+           changeStyle(oBc, oBd[this.index], oBe[this.index])   //只能单项循环
+        }
+    }
+};
+</script>
+</head>
+<body>
+   <div id="div1">
+   <input type="button" value="broaden" >
+   <input type="button" value="heighten">
+   <input type="button" value="change color">
+   <input type="button" value="hide">
+   <input type="button" value="resetting">
+   <div id="div2"></div>
+</div>
+</body>
+</html>

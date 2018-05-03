@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>课后练习2</title>
+<style type="text/css">
+body{text-align: center;}
+p{padding: 0;margin: 0;}
+#div{
+	width: 400px;
+    height: 600px;
+    background: red;
+    border: 10px solid #ccc;
+    position: relative;
+    margin:10px auto;
+
+}
+a{
+	width: 50px;
+    background: white;
+    opacity: 0.8;
+    height: 50px;
+    position: absolute;
+    top: 275px;
+    text-decoration: none;
+    font-size: 35px;
+    text-align: center;
+    border: 1px solid black;
+}
+a:hover{color:red;opacity: 0.3;}
+#prev{left: 0;}
+#next{right:0;}
+#p1,#p2{
+	width: 400px;
+    height: 40px;
+    background: black;
+    opacity: 0.8;
+    color: white;
+    text-align: center;
+    font-size: 25px;
+}
+#p2{position: absolute;bottom: 0px;}
+#img{
+	width: 400px;
+	height: 600px;
+	margin-top: -40px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oDiv = document.getElementById("div");
+	var oPrev = document.getElementById("prev");
+	var oNext = document.getElementById("next");
+	var oP1 = document.getElementById("p1");
+	var oP2 = document.getElementById("p2");
+	var oImg = document.getElementById("img");
+	var oBtn1 = document.getElementById("btn1");
+	var oBtn2 = document.getElementById("btn2");
+
+	var arrUrl = [ 'img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg' ];
+	var arrText = [ '文字一', '文字二', '文字三', '文字四' ];
+	var num = 0;
+	var onOff = true;
+
+	oBtn1.onclick = function(){
+		onOff = true;
+		document,getElementsByTagName("span")[0].innerHTML = "图片可从最后一张跳转到第一张循环切换";
+	}
+	oBtn2.onclick = function(){
+		onOff = false;
+		document.getElementsByTagName("span")[0].innerHTML = "图片只能到最后一张\或只能到第一张切换";
+	}
+	function fnTab(){
+		oP2.innerHTML = num + 1 + "/"+ arrUrl.length;
+		oImg.src = arrUrl[num];
+		oP1.innerHTML = arrText[num];
+	}
+	fnTab();
+
+	oPrev.onclick = function(){
+		num--;
+		if(num == -1){
+			if(onOff){
+				num=arrUrl.length-1;
+			}else{
+				alert("这是第一张，不能再往前了！");
+				num=0;
+			}
+		}
+		fnTab();
+	}
+	oNext.onclick = function(){
+		num++;
+		if(num == arrUrl.length ){
+			if(onOff){
+				num=0;
+			}else{
+				alert("已经到最后一张了!");
+				num=arrUrl.length-1;
+			}
+		}
+		fnTab();
+	}
+
+}
+</script>
+</head>
+<body>
+	<input id="btn1" type="button" value="循环切换">
+	<input id="btn2" type="button" value="顺序切换"></br>
+	<span>图片可从最后一张跳转到第一张循环切换</span>
+	<div id="div">
+		<a id="prev" href="javascript:;"><</a>
+		<a id="next" href="javascript:;">></a>
+		<p id="p1">图片文字加载中.....</p>
+		<p id="p2">图片数量统计中.....</p>
+		<img id="img" src="">
+	</div>
+</body>
+</html>

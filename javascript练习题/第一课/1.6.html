@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>the tips</title>
+<style>
+body{font-size: 12px;}
+body,input,p{
+	margin: 0;
+	padding: 0;
+}
+input{
+	margin-right:5px;
+	vertical-align:middle;
+}
+#div1{
+	width: 200px;
+    margin: 0;
+    margin-left: 43%;
+    margin-top: 50px;
+
+}
+#div2{
+	padding:5px;
+	margin-top:5px;
+	background:yellow;  /*弹出框的颜色*/
+	border:1px solid red;  /*弹出框的边缘颜色*/
+	display:none;
+}
+</style>
+<script type="text/javascript">
+window.onload = function ()
+{
+	var oArr = document.getElementById("div2");
+	var obir = document.getElementsByTagName("label")[0];
+	obir.onmouseover = function ()
+	{
+		oArr.style.display = "block"
+	};
+	obir.onmouseout = function ()
+	{
+		oArr.style.display = "none"
+	}
+}
+</script>
+</head>
+<body>
+	<div id="div1">
+		<label><input type="checkbox">两周内自动登录</label>
+		<div id="div2">为了信息安全请不要在网吧或公用电脑上使用此功能！</div>
+	</div>
+</body>
+<html>

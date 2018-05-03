@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>click button add 1</title>
+<style>
+body{text-align:center;}
+input{
+	font:12px arial;
+	cursor:pointer;
+	padding:0 10px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function ()
+{
+	var oArr = document.getElementsByTagName("input")[0];
+	var i = 0;
+	oArr.onclick = function ()
+	{
+		oArr.value = ++i;
+		alert(i)
+	}
+}
+</script>
+</head>
+<body>
+	<input type="button" value="0">
+</body>
+</html>

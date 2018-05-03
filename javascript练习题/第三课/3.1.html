@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>use typeof check</title>
+<style>
+pre{
+	color:green;  /*代码颜色*/
+	padding:10px 15px;
+	background:#f0f0f0;  /*背景颜色*/
+	border:1px dotted #333;
+	font:12px/1.5 Courier New;  /*字体格式*/
+}
+span{color:#999;}   /*注释颜色*/
+</style> 
+</head>
+<body>
+	<pre>
+		&lt;script type="text/javascript"&gt;
+		alert(typeof 12345);    <span>//输出number</span>
+		alert(typeof "abc");    <span>//输出string</span>
+		alert(typeof document)  <span>//输出object</span>
+		&lt;/script&gt;
+	</pre>
+	<script type="text/javascript">
+	alert("typeof 12345 → " + typeof 12345 + "\
+		\n\ntypeof \"abc\" → " + typeof "abc" + "\
+		\n\ntypeof document → " +typeof document
+		);
+	</script>
+</body>
+</html>

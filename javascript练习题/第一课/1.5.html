@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>the differents when mouse move</title>
+<style>
+body{
+	font-size: 12px;
+	color:green;  /*打开页面时字体颜色*/
+}
+#div1{
+	width: 120px;
+    height: 120px;
+    margin: 0;
+    padding: 0;
+    background-color: black;  /*打开页面时方块颜色*/
+    border: 1px solid #ccc;   /*大开页面时方块的边缘颜色*/
+    cursor: crosshair;   /*我试过删除，可有可无*/
+    margin-left: 43%;
+    margin-top: 50px;
+}
+#div1.hover{
+	color:red;  /*鼠标移上去时字体的颜色*/
+	background:#f0f0f0;  /*鼠标移上去时方块的背景颜色*/
+	border:10px solid blue;  /*鼠标移上去时方块的边缘颜色*/
+}
+</style>
+<script type="text/javascript">
+window.onload = function ()
+{
+	var oArr = document.getElementById("div1");
+	oArr.onmouseover = function ()
+	{
+		oArr.className="hover"  //当鼠标移上去时触发函数元素开始
+	}
+	oArr.onmouseout = function ()
+	{
+		oArr.className = ""  //鼠标移出去时恢复原来
+	}
+};
+</script>
+</head>
+<body>
+	<div id="div1">鼠标移入时改变样式，移出后恢复</div>
+</body>
+</html>

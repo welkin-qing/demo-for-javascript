@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>change div property</title>
+<style type="text/css">
+body,p{
+	margin:0;
+	padding: 0;
+}
+body{
+	color:#333;   /*表属性的字样*/
+	font:12px/1.5 微软雅黑;
+	padding:10px;
+}
+p{margin-bottom:8px;}
+#out{
+	width:300px;
+	margin:0 auto;
+}
+label{
+	width:5em;
+	display:inline-block;
+	text-align:right;
+}
+input{
+	padding:3px;
+	font-family:inherit;
+	border:1px solid #ccc;
+}
+#div1{
+	color: #fff;
+    width: 200px;
+    height: 200px;
+    background: red;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    left: 40%;
+}
+</style>
+<script type="text/javascript">
+var changeStyle = function (elem,name,value){
+	elem.style[name] = value
+}
+window.onload = function ()
+{
+	var oArr = document.getElementById("div1");
+	var oBrr = document.getElementsByTagName("button");
+	var oCrr = document.getElementsByTagName("input");
+	oBrr[0].onclick = function ()
+	{
+		changeStyle(oArr, oCrr[0].value, oCrr[1].value)
+	}
+	oBrr[1].onclick = function ()
+	{
+		oArr.removeAttribute("style")
+	}
+}
+</script>
+</head>
+<body>
+	<div id="out">
+		<p><label>属性名：</label><input type="text" value="background"></p>
+		<p><label>属性值：</label><input type="text" value="red"></p>
+		<p><label></label><button>确定</button><button>重置</button></p>
+	</div>
+	<div id="div1">在上方输入框输入"属性名"及"属性值"，点击确定按钮查看效果。</div>
+</body>
+</html>

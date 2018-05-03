@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http//www.lianxiti">
+<head>
+<meta charset="UTF-8">
+<title>change skin</title>
+<style type="text/css">
+body{
+  font-size:12px;
+  margin: 0;
+  padding:0;
+}
+/*{margin:0;padding:0;}*/
+ul,li{list-style:none}
+.change_skin{    
+    height: 42px;
+    background: #E8E8E8;
+    border: 1px solid #e9e8e5;
+    width: 285px;
+    color: #333;
+    line-height: 25px;
+    margin: 25px 0px 25px 10px;
+    padding-left: 15px;
+}
+.change_skin li{float:left}
+.change_skin .bor{border-right:1px solid #e9e8e5; padding-right:7px; margin-right:10px}
+.change_skin li span{margin:7px 4px 0px 0px;cursor:pointer;display:block}
+.change_skin li span em{display:block;height:9px;width:10px;overflow:hidden;text-indent:-9999px}
+.change_skin a{color:#333;text-decoration:none; margin-right:5px}
+.change_skin li .on{ border:1px solid #333;cursor:default}
+h2{
+    font-size: 12px;
+    padding: 8px 0px 10px 15px;
+    position: absolute;
+}
+#sk_blue{background:#2086b3;}
+#sk_red{background:#e64c13}
+#sk_yel{background:#b7a37a;}
+#warpper{overflow:hidden;height:1%}
+.contentl{margin-right:-244px;float:left;width:100%}
+.contentr{ 
+    width: 230px;
+    float: right;
+    position: absolute;
+    height: 302px;
+    left: 1118px;
+}
+.main{    
+    margin-right: 254px;
+    margin-left: 10px;
+    height: 300px;
+    position: absolute;
+    width: 1073px;
+}
+.footer{    
+    height: 30px;
+    margin: 30px 10px 0px 10px;
+    position: relative;
+    top: 350px;
+}
+.blue .content{background:#2086b3;color:#fff;}
+.blue .bb{border:2px solid #2086b3;}
+.blue .footer{background:#2086b3;}
+.red .content{background:#e64c13}
+.red .bb{border:2px solid #e64c13;}
+.red .footer{background:#e64c13;}
+.yel .content{background:#b7a37a;color:#f00}
+.yel .bb{border:2px solid #b7a37a;}
+.yel .footer{background:#b7a37a;}
+</style>
+<script type="text/javascript">
+function setOnloadEvent(func){
+  var oldonload = window.onload;
+  if(typeof window.onload != "function"){
+    window.onload = func;
+  }
+  else{
+    window.onload = function(){
+      oldonload();
+      func();
+    }
+  }
+}
+
+function setCookie(name,value,days) {
+  if(days) {
+    var date = new Date();
+    date.setTime(date.getTime()+(days*24*60*60*1000));
+    var expires = "; expires="+date.toGMTString();
+  }
+  else expires="";
+  document,cookie = name+"="+value+expires+";path=/";
+}
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0;i < ca.length;i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c =c.substring(1,c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}
+
+function skin(){
+  if(!document.getElementsByTagName) return false;
+  if(!document.getElementById("skin")) return false;
+  var skin_id="red";   //控制打开页面时所展示的页面颜色
+  if(getCookie("id")!=null){
+    skin_id=getCookie("id");
+  }
+  var span_id=skin_id+"_sp";
+  var span_on=document.getElementById(span_id);
+  document.body.className=skin_id;
+  span_on.className="on";
+  var skinType=document.getElementById("skin");
+  var skin_nub=skinType.getElementsByTagName("em");
+  for(var i=0; i<skin_nub.length;i++){
+    skin_nub[i].onclick=function(){
+      var em_id=this.getAttribute("id");
+      var skin_id=em_id.split("_")[1];
+      var spanList=document.getElementsByTagName("span");
+      for(var j=0;j<spanList.length;j++){
+        spanList[j].className="";
+        if(spanList[j].getAttribute("id").indexOf(skin_id)!=-1)
+        {
+          spanList[j].className="on";
+        }
+      }
+      document.body.className=skin_id;
+      setCookie("id",skin_id,1);
+    }
+  }
+}
+setOnloadEvent(skin);
+</script>
+</head>
+<body>
+  <div id="header">
+    <div class="change_skin" id="skin">
+      <ul>
+        <li>选择页面颜色</li>
+        <li><span id="blue_sp"><em id="sk_blue">ee</em></span></li>
+        <li><span id="red_sp"><em id="sk_red">ere</em></span></li>
+        <li><span id="yel_sp"><em id="sk_yel">ere</em></span></li>
+      </ul>
+    </div>
+  </div>
+  <div id="warpper">
+    <div class="contentl" >
+      <div class="main bb"><h2>换肤测试</h2></div>
+    </div>
+    <div class="contentr bb" ><h2>换肤测试</h2></div>
+  </div>
+  <div class="footer"></div>
+</body>
+</html>
