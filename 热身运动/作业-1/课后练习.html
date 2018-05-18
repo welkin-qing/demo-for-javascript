@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>课后练习1</title>
+<style type="text/css">
+#div1{
+	width:100px;
+	height:100px;
+	border:5px;
+}
+#but{
+	width:100px;
+	height: 20px;
+	background: red;
+	border: none;
+	color:white;
+}
+#div1{
+	border:2px solid black;
+	width: 100px;
+	height:100px;
+	background: white;
+}
+#div2 {
+    width: 200px;
+    height: 140px;
+    background: white;
+    border: 5px solid #D3D3D3;
+    margin-top: 10%;
+    position: absolute;
+    left: 42%;
+    display: none;
+}
+#div2 p{
+	margin-bottom: 10px;
+    font-size: 15px;
+    margin-left: 2px;
+
+}
+#but1{
+	width: 60px;
+    height: 25px;
+	background: blue;
+	color:white;
+	margin-left: 18%;
+	border:none;
+
+}
+#but2{
+	width:60px;
+	height:25px;
+	background: blue;
+	color:white;
+	border:none;
+}
+#clo{
+	width: 100px;
+    height: 30px;
+    background: white;
+    float: right;
+    margin-top: -35px;
+}
+#clo p{
+	padding: 0;
+    margin: 0;
+    font-size: 12px;
+    padding-top: 5px;
+    text-align: center;
+    color:white;
+}
+#clo_red{
+	width:30px;
+	height:30px;
+	background: #ADFF2F;
+}
+#clo_yel{
+	width: 30px;
+    height: 30px;
+    background:#FFD700;
+    position: absolute;
+    left: 135px;
+    top: 10px;
+}
+
+#clo_blu{
+	width: 30px;
+    height: 30px;
+    background:#6495ED;
+    position: absolute;
+    left: 170px;
+    top: 10px;
+}
+#wid{
+	width: 100px;
+    height: 30px;
+    background: white;
+    float: right;
+    margin-top: -35px;
+}
+#wid p{
+	padding: 0;
+    margin: 0;
+    font-size: 12px;
+    padding-top: 5px;
+    text-align: center;
+    color:#696969;
+}
+#wid_200{
+	width:30px;
+	height:30px;
+	background: #DCDCDC;
+	border: 1px solid #A9A9A9;
+}
+#wid_300{
+	width: 30px;
+    height: 30px;
+    background: #DCDCDC;
+    position: absolute;
+    left: 135px;
+    top: 45px;
+    border: 1px solid #A9A9A9;
+}
+#wid_400{
+	width: 30px;
+    height: 30px;
+    background: #DCDCDC;
+    position: absolute;
+    left: 170px;
+    top: 45px;
+    border: 1px solid #A9A9A9;
+}
+#hei{
+	width: 100px;
+    height: 30px;
+    background: white;
+    float: right;
+    margin-top: -35px;
+}
+#hei p{
+	padding: 0;
+    margin: 0;
+    font-size: 12px;
+    padding-top: 5px;
+    text-align: center;
+    color:#696969;
+}
+#hei_200{
+	width:30px;
+	height: 30px;
+	background: #DCDCDC;
+	border: 1px solid #A9A9A9;
+}
+#hei_300{
+	width: 30px;
+    height: 30px;
+    background: #DCDCDC;
+    position: absolute;
+    left: 135px;
+    top: 80px;
+    border: 1px solid #A9A9A9;
+}
+#hei_400{
+    width: 30px;
+    height: 30px;
+    background: #DCDCDC;
+    position: absolute;
+    left: 170px;
+    top: 80px;
+    border: 1px solid #A9A9A9;
+}
+</style>
+<script>
+window.onload = function(){
+	var oBut = document.getElementById("but");
+	var oBut1 = document.getElementById("but1");
+	var oBut2 = document.getElementById("but2");
+
+	var oDiv1 = document.getElementById("div1");
+	var oDiv2 = document.getElementById("div2");
+
+	var obtn = document.getElementById("clo");
+	var obtn1 = document.getElementById("clo_red");
+	var obtn2 = document.getElementById("clo_yel");
+	var obtn3 = document.getElementById("clo_blu");
+
+	var owid = document.getElementById("wid");
+	var owid_200 = document.getElementById("wid_200");
+	var owid_300 = document.getElementById("wid_300");
+	var owid_400 = document.getElementById("wid_400");
+
+	var ohei_200 = document.getElementById("hei_200");
+	var ohei_300 = document.getElementById("hei_300");
+	var ohei_400 = document.getElementById("hei_400");
+
+	oBut.onclick = function(){  //点击Button后出现弹出框
+		oDiv2.style.display = 'block';
+	}
+	oBut1.onclick = function(){  //恢复原状
+		oDiv1.style.background = 'white';
+		oDiv1.style.width = '100px';
+		oDiv1.style.height = '100px';
+		oDiv1.style.border = '2px solid black';
+	}
+	oBut2.onclick = function(){  //点击确定后关闭弹出框
+		oDiv2.style.display = 'none';
+	}
+
+
+	obtn1.onmouseover = function () {  //鼠标移入时使小方块变成红色
+		obtn1.style.background = "red";
+	}
+	obtn1.onclick = function(){
+		oDiv1.style.background = 'red'; //鼠标点击时使大方块变成红色
+	}
+	obtn1.onmouseout = function(){     
+		obtn1.style.background = "#ADFF2F"; //鼠标移出时小方块恢复原状
+	}
+
+	
+	obtn2.onmouseover = function(){
+		obtn2.style.background = '#FFFF00';
+	}
+	obtn2.onmouseout = function(){
+		obtn2.style.background = '#FFA500';
+	}
+	obtn2.onclick = function(){
+		oDiv1.style.background = '#FFFF00';
+	}
+
+	obtn3.onmouseover = function(){
+		obtn3.style.background ='#0000CD';
+	}
+	obtn3.onmouseout = function(){
+		obtn3.style.background = '#6495ED';
+	}
+	obtn3.onclick = function(){
+		oDiv1.style.background = '#6495ED';
+	}
+
+	owid_200.onmouseover = function(){
+		owid_200.style.background = '#FFA500';
+	}
+	owid_200.onmouseout = function(){
+		owid_200.style.background = '#DCDCDC';
+	}
+	owid_200.onclick = function(){
+		oDiv1.style.width = '200px';
+	}
+
+	owid_300.onmouseover = function(){
+		owid_300.style.background = '#FFA500';
+	}
+	owid_300.onmouseout = function(){
+		owid_300.style.background = '#DCDCDC';
+	}
+	owid_300.onclick = function(){
+		oDiv1.style.width = '300px';
+	}
+
+	owid_400.onmouseover = function(){
+		owid_400.style.background = '#FFA500';
+	}
+	owid_400.onmouseout = function(){
+		owid_400.style.background = '#DCDCDC';
+	}
+	owid_400.onclick = function(){
+		oDiv1.style.width = '400px';
+	}
+
+	ohei_200.onmouseover = function(){
+		ohei_200.style.background = '#FFA500';
+	}
+	ohei_200.onmouseout = function(){
+		ohei_200.style.background = '#DCDCDC';
+	}
+	ohei_200.onclick = function(){
+		oDiv1.style.height = '200px';
+	}
+
+	ohei_300.onmouseover = function(){
+		ohei_300.style.background = '#FFA500';
+	}
+	ohei_300.onmouseout = function(){
+		ohei_300.style.background = '#DCDCDC';
+	}
+	ohei_300.onclick = function(){
+		oDiv1.style.height = '300px';
+	}
+
+	ohei_400.onmouseover = function(){
+		ohei_400.style.background = '#FFA500';
+	}
+	ohei_400.onmouseout = function(){
+		ohei_400.style.background = '#DCDCDC';
+	}
+	ohei_400.onclick = function(){
+		oDiv1.style.height = '400px';
+	}
+}
+</script>
+</head>
+
+<body>
+	<strong>请为下面的DIV设置样式:</strong>
+	<button id="but">点击设置</button>
+	<div id="div1"></div>
+	<div id="div2">
+		<p>请选择背景色:</p>
+		<div id="clo">
+			<div id="clo_red"><p>红</p></div>
+			<div id="clo_yel"><p>黄</p></div>
+			<div id="clo_blu"><p>蓝</p></div>
+		</div>
+		<p>请选择宽(px):</p>
+		<div id="wid">
+			<div id="wid_200"><p>200</p></div>
+			<div id="wid_300"><p>300</p></div>
+			<div id="wid_400"><p>400</p></div>
+		</div>
+		<p>请选择高(px):</p>
+		<div id="hei">
+			<div id="hei_200"><p>200</p></div>
+			<div id="hei_300"><p>300</p></div>
+			<div id="hei_400"><p>400</p></div>
+		</div>
+		<button id="but1">恢复</button>
+		<button id="but2">确定</button>
+	</div>
+</body>
+</html>
