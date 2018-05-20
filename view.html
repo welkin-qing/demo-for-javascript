@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>video</title>
+</head>
+<body>
+  <video id="video" height="480" width="320"></video>
+  <div>
+    <button id="capture">拍照</button>
+    <button id="start">开始</button>
+    <button id="stop">停止</button>
+  </div>
+  <canvas id="canvas" width="480" height="320"></canvas><br>
+  <video src="" id="videotape" width="480" height="320" controls></video>
+<script>
+var global_stream = null,
+    chunks = null,
+    save = null;
+
+var options = {
+  audio:true,
+  video:{
+    width:480,
+    height:320
+  }
+};
+
+getMedia(options, success, error);
+
+
+function getMedia(constraints, success, error){   //获取API
+  if(navigator.mediaDevices.getUserMedia){
+    navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
+  }else if(navigator.getUserMedia){
+    navigator.getUserMedia(constraints, success, error);
+  }else if(navigator.webkitGetUserMedia){
+    navigator.webkitGetUserMedia(constraints, success, error);
+  }else if(navigator.mozGetUserMedia){
+    navigator.mozGetUserMedia(constraints, success, error);
+  }else{
+    console.log("浏览器不支持");
+  }
+}
+function success(stream){
+  video.srcObject = stream;
+  global_stream = stream; //提升到全局
+  video.play();
+  var start = document.getElementById("start"),
+      stop = document.getElementById("stop"),
+      capture = document.getElementById("capture");
+  start.addEventListener("click", startRecording ,false);
+  stop.addEventListener("click", stopRecording, false);
+  capture.addEventListener("click", takePicture, false);
+}
+function error(err){
+  console.log(err.name + ":" + err.message);
+}
+function startRecording(){
+  save = new MediaRecorder(global_stream,{ mimeType:'video/webm' });
+  save.ondataavailable = function(e){
+    chunks = e.data;   //提升到chunks
+  };
+  save.onstop = function(e){
+    var oBlob = new Blob([chunks], { 'type' : 'video/webm' });
+    var videotape = document.getElementById("videotape");
+    videotape.src = URL.createObjectURL(oBlob);
+    videotape.play();
+  };
+  save.start();
+}
+function stopRecording(){
+  save.stop();
+}
+function takePicture(){
+  var context = document.getElementById("canvas").getContext("2d"),
+      video = document.getElementById("video");
+  context.drawImage(video, 0, 0, 480, 320);
+}
+</script>
+</body>
+</html>
