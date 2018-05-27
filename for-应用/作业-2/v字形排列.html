@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>v字形排列</title>
+<style type="text/css">
+div{
+	width:50px;
+	height:50px;
+	background: red;
+	position: absolute;
+	top:0px;
+	left: 0px;
+	text-align: center;
+	font-size: 30px;
+	line-height: 50px;
+	color:white;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var aDiv = document.getElementsByTagName('div');
+	var j=4;
+	for(var i=0;i<11;i++){
+		document.body.innerHTML += '<div>'+ i + '</div>';
+	}
+	for(var i=0;i<=10;i++){
+		aDiv[i].style.left = i*50 + 'px';
+		aDiv[i].style.top = i*50 +'px';
+		if(i>5){
+			aDiv[i].style.left = i*50 + 'px';
+			aDiv[i].style.top = j*50 + 'px';
+			j--;
+		}
+	}
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

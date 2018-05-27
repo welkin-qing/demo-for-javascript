@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>this指针应用</title>
+<style type="text/css">
+.img{
+	width: 150px;
+	height:100px;
+}
+li{
+	width:100px;
+	height:100px;
+	float:left;
+	margin-right: 20px;
+	list-style: none;
+	position:relative;
+	z-index:1; /*指定一个元素的堆叠顺序,拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面*/
+}
+div{
+	width:82px;
+	height:105px;
+	background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+	position: absolute;
+	top:75px;
+	left:30px;
+	display: none;
+}
+li span {
+	display: block;
+	width: 80px;
+	height: 80px;
+	border: 1px solid black;
+	margin-right: 2px;
+	text-align:;
+}
+li span+span {
+	height: 20px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var aLi = document.getElementsByTagName('li');
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].onmouseover = function(){
+			this.getElementsByTagName('div')[0].style.display = 'block';
+		};
+		aLi[i].onmouseout = function(){
+			this.getElementsByTagName('div')[0].style.display = 'none';
+		};
+	}
+}
+</script>
+</head>
+<body>
+	<ul>
+		<li>
+			<div>
+				<span></span>
+			    <span>说明1</span>
+			</div>
+			<img class="img" src="img/al.jpg">
+		</li>
+		<li>
+			<div>
+				<span></span>
+				<span>说明</span>
+			</div>
+			<img class="img" src="img/qyc.jpg">
+		</li>
+		<li>
+			<div>
+				<span></span>
+				<span>说明3</span>
+			</div>
+			<img class="img" src="img/jg.jpg">
+		</li>
+		<li>
+			<div>
+				<span></span>
+				<span>说明4</span>
+			</div>
+			<img class="img" src="img/zyq.jpg">
+		</li>
+	</ul>
+</body>
+</html>

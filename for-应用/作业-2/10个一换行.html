@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>10个一换行</title>
+<style type="text/css">
+div{
+	width:50px;
+	height:50px;
+	background: red;
+	position: absolute;
+	top:0px;
+	left: 0px;
+	text-align: center;
+	font-size: 30px;
+	line-height: 50px;
+	color:white;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var aDiv = document.getElementsByTagName('div');
+	for(var i=0;i<50;i++){
+		document.body.innerHTML += '<div>'+ i + '</div>';
+	}
+	for(var i=0;i<aDiv.length;i++){
+		aDiv[i].style.left = 10 +i*60+'px';
+		aDiv[i].style.top = 0+'px';
+		if(i>9 && i<20 ){
+			//aDiv[i].style.float = 'left';
+			aDiv[i].style.left = 10 +(i-10)*60 +'px';
+			aDiv[i].style.top = '60px';
+		}
+		if(i>19 && i<30 ){
+			//aDiv[i].style.float = 'left';
+			aDiv[i].style.left = 10 +(i-20)*60 +'px';
+			aDiv[i].style.top = '120px';
+		}
+		if(i>29 && i<40 ){
+			//aDiv[i].style.float = 'left';
+			aDiv[i].style.left = 10 +(i-30)*60 +'px';
+			aDiv[i].style.top = '180px';
+		}
+		if(i>39 && i<50 ){
+			//aDiv[i].style.float = 'left';
+			aDiv[i].style.left = 10 +(i-40)*60 +'px';
+			aDiv[i].style.top = '240px';
+		}
+	}
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>
