@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>QQ列表的展开和收缩</title>
+<style type="text/css">
+ul,h2{
+	padding: 0;
+	margin:0;
+}
+li{list-style: none;}
+#list{
+	width:300px;
+	border: 1px solid black;
+	margin:30px auto;
+}
+.lis li{
+	border-bottom: 1px solid black;/*给每一个li加上分割线*/
+	text-indent: 15px;/*缩进*/
+	cursor: pointer;/*定义光标形状*/
+	background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+}
+.lis ul{
+	display: none;
+}
+#list h2{
+	background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+	text-indent: 15px;
+	cursor: pointer;
+}
+#list h2.active{background-image: linear-gradient(to top, #feada6 0%, #f5efef 100%);}
+#list .selected{background-image: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oList = document.getElementById('list');
+	var aH = oList.getElementsByTagName('h2');
+	var aUl = oList.getElementsByTagName('ul');
+	var len;
+	var aLi;
+	var arrLi = [];
+	len = aH.length;
+	var onOff = 0
+	var on = true;
+	for(var i=0;i<len;i++){
+		aH[i].index = i;//显示索引
+		aH[i].onclick = function(){
+			if(on){
+				for(var i=0;i<len;i++){
+					aUl[i].style.display = 'none';//使未点击的不展开
+					aH[i].className = '';//使未点击的恢复原来的颜色
+				}
+				aUl[this.index].style.display = 'block';
+				aH[this.index].className = 'active';
+				on = false;
+			}else{
+				aUl[this.index].style.display = 'none';
+				on = true;
+			}
+			
+
+		}
+	}
+	for(var i=0;i<aUl.length;i++){
+		aLi = aUl[i].getElementsByTagName('li');
+		for(var j=0;j<aLi.length;j++){
+			arrLi.push(aLi[j]);  //入栈
+		}
+	}
+	for(var i=0;i<arrLi.length;i++){
+		arrLi[i].index = i;
+		arrLi[i].onclick = function(){
+			if(arrLi[onOff] != this){
+				arrLi[onOff].className = '';
+			}
+			if(arrLi[this.index].className){
+				arrLi[this.index].className = ''; //使未点击的恢复原来的颜色
+			}else{
+				arrLi[this.index].className = 'selected';
+			}
+			onOff = this.index;
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<ul id="list">
+		<li class="lis">
+			<h2>我的好友</h2>
+			<ul>
+				<li>哆啦A梦</li>
+				<li>大雄</li>
+				<li>静香</li>
+				<li>胖虎</li>
+			</ul>
+		</li>
+		<li class="lis">
+			<h2>特别关心</h2>
+			<ul>
+				<li>蜡笔小新</li>
+				<li>工藤新一</li>
+				<li>樱木花道</li>
+			</ul>
+		</li>
+		<li class="lis">
+			<h2>黑名单</h2>
+			<ul>
+				<li>熊大</li>
+				<li>熊二</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>
