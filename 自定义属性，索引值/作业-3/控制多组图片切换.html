@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>控制多组图片切换</title>
+<style type="text/css">
+#container{
+	margin-top: 10px;
+	width:700px;
+	height:600px;
+}
+#left{
+	width:450px;
+	height:410px;
+	background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+	margin-top: 10px;
+	margin: 0;
+	padding: 0px;
+}
+#right{
+	width:280px;
+	height:410px;
+	background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+	position: absolute;
+	top: 41px;
+    left: 458px;
+}
+.img1{
+	width:430px;
+	height:340px;
+	padding: 10px;
+}
+.img2{
+	width: 260px;
+	height:340px;
+	padding: 10px;
+}
+p{margin:0;padding: 0;}
+#p1{
+	margin: 0 auto;
+    font-size: 20px;
+    width: 120px;
+    height: 20px;
+    color: white;
+}
+#p2{
+	margin: 0 auto;
+    font-size: 20px;
+    width: 50px;
+    height: 20px;
+    color: white;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oLeftBox = document.getElementById('left');
+	var oRightBox = document.getElementById('right');
+	var oPrev = document.getElementById('prev');
+	var oNext = document.getElementById('next');
+	var oLeftImg = oLeftBox.getElementsByTagName('img')[0];
+	var oRightImg = oRightBox.getElementsByTagName('img')[0];
+	var aSpan1 = oLeftBox.getElementsByTagName('span')[0];
+	var aSpan2 = oRightBox.getElementsByTagName('span')[0];
+	var oP1 = document.getElementById('p1');
+	var oP2 = document.getElementById('p2');
+
+	var arrLeftGroup = ['img/qyc.jpg','img/jg.jpg','img/al.jpg','img/xyq.jpg','img/xyj.jpg'];
+	var arrRightGroup = ['img/m.jpg','img/y.jpg','img/r.jpg'];
+	var arrLeftText = ['犬夜叉','桔梗','阿离','孤单的犬夜叉','孤单的桔梗'];
+	var arrRightText = ['猫','鱼','人'];
+	var numleft = 0;
+	var numright = 0;
+
+	//初始化
+	function changeLeft(){
+		//alert(1);
+		oLeftImg.src = arrLeftGroup[numleft];
+		aSpan1.innerHTML = numleft + 1 + '/' + arrLeftGroup.length;
+		oP1.innerHTML = arrLeftText[numleft];
+	}
+	changeLeft();
+
+	function changeRight(){
+		oRightImg.src = arrRightGroup[numright];
+		aSpan2.innerHTML = numright + 1 + '/' + arrRightGroup.length;
+		oP2.innerHTML = arrRightText[numright];
+	}
+	changeRight();
+
+	oLeftImg.onclick = function(){
+		numleft++;
+		if(numleft == arrLeftGroup.length){
+			numleft = 0;
+		}
+		changeLeft();
+	}
+	oRightImg.onclick = function(){
+		numright++;
+		if(numright == arrRightGroup.length){
+			numright = 0;
+		}
+		changeRight();
+	}
+	oPrev.onclick = function(){
+		numright--;
+		numleft--;
+		if(numleft == -1){
+			numleft = arrLeftGroup.length - 1;
+		}
+		changeLeft();
+		if(numright == -1){
+			numright = arrRightGroup.length - 1;
+		}
+		changeRight();
+	}
+	oNext.onclick = function(){
+		numleft++;
+		numright++;
+		if(numleft == arrLeftGroup.length){
+			numleft = 0;
+		}
+		changeLeft();
+		if(numright == arrRightGroup.length){
+			numright = 0;
+		}
+		changeRight();
+	}
+}
+</script>
+</head>
+<body>
+	<input type="button" value="上一组" id="prev"/>
+	<input type="button" value="下一组" id="next"/>
+	<div id="container">
+		<div id="left">
+			<img class="img1">
+			<p id="p1"></p>
+			<span></span>
+		</div>
+		<div id="right">
+			<img src="img/m.jpg" class="img2">
+			<p id="p2">文字</p>
+			<span>1/4</span>
+		</div>
+	</div>
+</body>
+</html>
