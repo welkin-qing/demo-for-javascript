@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>QQ号码判断</title>
+<script type="text/javascript">
+window.onload = function(){
+	var aIpt = document.getElementsByTagName('input');
+
+	aIpt[1].onclick = function(){
+		var textString = aIpt[0].value;
+		var num =0;
+		if(parseFloat(aIpt[0].value)===0){
+			alert('宝贝，请输入内容哦~');
+		}else if(aIpt[0].value.length>0){
+			for(var i=0; i<aIpt[0].value.length;i++){
+				if(aIpt[0].value.charAt(i) == ' '){
+					alert('宝贝，输入内容有空格哦~');break;
+				}
+			}
+		}
+
+		if(aIpt[0].value.length === 0){
+			alert('宝贝，请输入内容哦~');
+		}else if(isNaN(aIpt[0].value) === true){
+			alert('宝贝，输入的不是数字哦~');
+		}else if(aIpt[0].value.charAt(0) == '0'){
+			alert('宝贝，输入数字前不能有0哦~');
+		}else if(parseFloat(aIpt[0].value)>0){
+			if(parseFloat(aIpt[0].value) !== parseInt(aIpt[0].value)){
+				alert('宝贝，输入的数字不能带有小数点哦~');
+			}else if(aIpt[0].value.length<5 || aIpt[0].value.length>10){
+				alert('宝贝，输入的号码必须是5位以上、10位以内哦~');
+			}else{
+				alert('QQ为：' + aIpt[0].value);
+			}
+		}
+
+	}
+	/*
+	在过程中我设计了当输入多个空格时会报错的情况
+	*/
+}
+</script>
+</head>
+<body>
+	请输入QQ号码：
+    <input type="text" />
+    <input type="button" value="判断" />
+    <br/> 1、有没有输入
+    <br/> 2、输入的是不是数字
+    <br/> 3、不能有0在前面
+    <br/> 4、不能是小数
+    <br/> 5、输入的数字必须在5位以上、10位以内
+    <br/>
+</body>
+</html>
