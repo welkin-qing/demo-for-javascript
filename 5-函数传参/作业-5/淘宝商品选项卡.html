@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>淘宝商品选项卡</title>
+<style type="text/css">
+body ul li{margin: 0;padding: 0;}
+#tabs{
+	width: 500px;
+	height:400px;
+	margin: 50px auto;
+	background: red;
+}
+img{width: 50px;height:50px;border: 1px solid 	#DCDCDC;}
+#nav{
+	width:100px;
+	height:400px;
+	background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+#nav li{
+	width: 130px;
+    list-style: none;
+    height: 95px;
+    border: 2px solid 	#D3D3D3;
+    margin-left: -37px;
+    line-height: 90px;
+    font-size: 20px;
+    font-weight: bold;
+    text-indent: 20px;
+    color:	#778899;
+}
+#nav li.selected{background: #fff;}
+#contens{
+	width: 400px;
+    height: 400px;
+    background: #fff;
+    position: relative;
+    bottom: 416px;
+    left: 140px;
+}
+#contens img{
+	width:400px;
+	height:400px;
+	display: none;
+}
+#contens ul{
+	position: absolute;
+	bottom: -16px;
+	opacity: 0.6;
+	width: 100%;
+	text-align: justify;/*改变字与字之间的间距使得每行对齐*/
+	display: none;
+	left: -40px;
+}
+#contens li{
+	list-style: none;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    padding: 2px;
+    font-size:12px;
+    display: table-cell;/*此元素会作为一个表格单元格显示（类似 <td> 和 <th>）*/
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+#contens ul.show{
+	display: table;/*此元素会作为块级表格来显示（类似 <table>），表格前后带有换行符。*/
+}
+#contens li.active{
+	background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+	opacity: 0.8;
+}
+</style>
+<script type="text/javascript">
+window.onload = function() {
+	var arrImg=[
+		['img/nikey1.jpg','img/nikey2.jpg','img/nikey3.jpg'],
+		['img/zaray1.jpg','img/zaray2.jpg','img/zaray3.jpg','img/zaray4.jpg','img/zaray5.jpg'],
+		['img/zarax1.jpg','img/zarax2.jpg','img/zarax3.jpg','img/zarax4.jpg'],
+		['img/nikex1.jpg','img/nikex2.jpg','img/nikex3.jpg','img/nikex4.jpg','img/nikex5.jpg']
+	];
+	var oNav = document.getElementById('nav');
+	var aLi = oNav.getElementsByTagName('li');
+	var oContens = document.getElementById('contens');
+	var aUl = oContens.getElementsByTagName('ul');
+	var aImg = oContens.getElementsByTagName('img');
+	var num = 0;
+	//var aSubLi = aUl[0].getElementsByTagName('li');
+
+	//浏览栏切换
+	aImg[0].style.display = 'block';
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].index = i;
+		aLi[i].onclick = function(){
+			for(var i=0;i<aLi.length;i++){
+				num = this.index;
+				aLi[i].className = '';
+				aUl[i].className = '';
+				aImg[i].style.display = 'none'
+			}
+			this.className = 'selected';
+			aUl[num].className = 'show';
+			aImg[num].style.display = 'block';
+		}
+		//若想改成当鼠标移入时，则加上一个鼠标移入事件就好，和onclick代码一样
+	}
+
+
+	//图片切换
+	for(var i=0;i<aUl.length;i++){
+		hover(aUl[i]);
+	}
+	function hover(ul){
+		var oLi = ul.getElementsByTagName('li');
+		for(var i=0; i<oLi.length; i++){
+			oLi[i].index = i;
+			oLi[i].onclick = function(){
+				for(var i=0; i<oLi.length;i++){
+					oLi[i].className = '';
+				}
+				this.className = 'active';
+				aImg[num].src = arrImg[num][this.index];
+			}
+			oLi[i].onmouseover = function(){
+				for(var i=0; i<oLi.length;i++){
+					oLi[i].className = '';
+				}
+				this.className = 'active';
+				aImg[num].src = arrImg[num][this.index];
+			}
+		}
+
+	}
+	/* 实现一个ul下li切换的代码
+	for(var i=0;i<aSubLi.length;i++){
+		aSubLi[i].index = i;
+		aSubLi[i].onclick = function(){
+			for(var i=0;i<aSubLi.length;i++){
+				aSubLi[i].className = '';
+			}
+			this.className = 'active';
+			aImg[num].src = arrImg[num][this.index];
+		}
+	}*/
+}
+</script>
+</head>
+<body>
+	<div id="tabs">
+		<ul id="nav">
+			<li class="selected">NIKE服饰</li>
+			<li>zara服饰</li>
+			<li>zara女鞋</li>
+			<li>nike女鞋</li>
+		</ul>
+		<div id="contens"> 
+			<img src="img/nikey1.jpg">
+			<ul class="show">
+				<li class="active">NIKE服饰1</li>
+				<li>NIKE服饰2</li>
+				<li>NIKE服饰3</li>
+			</ul>
+			<img src="img/zaray1.jpg">
+			<ul>
+				<li class="active">zara服饰1</li>
+				<li>zara服饰2</li>
+				<li>zara服饰3</li>
+				<li>zara服饰4</li>
+				<li>zara服饰5</li>
+			</ul>
+			<img src="img/zarax1.jpg">
+			<ul>
+				<li class="active">zara女鞋1</li>
+				<li>zara女鞋2</li>
+				<li>zara女鞋3</li>
+				<li>zara女鞋4</li>
+			</ul>
+			<img src="img/nikey1.jpg">
+			<ul>
+				<li class="active">NIKE运动1</li>
+				<li>NIKE运动2</li>
+				<li>NIKE运动3</li>
+				<li>NIKE运动4</li>
+				<li>NIKE运动5</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

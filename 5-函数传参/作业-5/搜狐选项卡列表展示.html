@@ -1,0 +1,444 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>搜狐选项卡列表展示</title>
+<style type="text/css">
+body p h2 div li ul{margin: 0;padding: 0;}
+#ranking{
+	width:300px;
+	height:400px;
+	margin:10px auto;
+	background: 	#20B2AA;
+	overflow: hidden;
+}
+li{list-style: none;}
+a{color: black;text-decoration: none;}
+h2{
+	padding: 0px;
+    height: 38px;
+    float: left;
+    border-bottom: 1px solid 	#FFE4E1;
+    margin: 0px;
+    line-height: 38px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+#tabNav{overflow: hidden;margin-top: 15px;}
+#tabNav li{
+	cursor: pointer;
+    border: 1px solid 	#FFDAB9;
+    float: left;
+    margin-left: -1px;
+    padding: 0 1px;
+    height: 24px;
+    line-height: 24px;
+    color: #008080;
+}
+#tabContent{clear: left;}
+#tabContent ul li{
+	line-height: 30px;
+	font-size: 15px;
+	position: relative;
+}
+#tabContent span{
+	position: absolute;
+    height: 15px;
+    line-height: 15px;
+    background: 	#87CEFA;
+    text-align: center;
+    font-weight: bold;
+    top: 8px;
+    left: -34px;
+    z-index: 1; /*为元素设置堆叠顺序*/
+    font-size: 7px;
+    width: 18px
+}
+#tabContent li a{
+	display: inline-block;
+	margin-left: -10px;
+}
+#tabContent li{
+	border-bottom: 1px dashed #fff;
+	cursor: pointer;
+}
+#tabContent ul div{
+	background: #F5F5F5;
+    overflow: hidden;
+    margin-left: -35px;
+    width: 290px;
+    display: none;	
+}
+#tabContent div img{
+	border: 1px solid black;
+    height: 70px;
+    float: left;
+    margin:10px 10px 12px 20px;
+
+}
+#tabContent p{margin: 0;padding: 4px;}
+#tabContent div a{
+	position: absolute;
+    font-size: 15px;
+    left: 210px;
+    top: 65px;
+    background: #FFD700;
+    width: 35px;
+    height: 25px;
+    text-align: center;
+}
+#daily #monthly #all{display: none;}
+.show{
+	display: block;
+}
+.active{
+	color: #000;
+	font-weight: bold;
+	background: #fff;
+	border-bottom: 1px solid black;
+}
+</style>
+<script type="text/javascript">
+window.onload = function () {
+	var oDaliy = document.getElementById('daily');
+	var oMonth = document.getElementById('monthly');
+	var oAll = document.getElementById('all');
+	var oTabNav = document.getElementById('tabNav');
+	var aLi = oTabNav.getElementsByTagName('li');
+	var oContent = document.getElementById('tabContent');
+	var aUl = oContent.getElementsByTagName('ul');
+	var pervab =aLi[0];
+
+	function fnTab(num){
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].className = '';
+			aUl[i].style.display = 'none';
+		}
+		aLi[num].className = 'active';
+		aUl[num].style.display = 'block';
+	}
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].index = i;
+		aLi[i].onclick = function(){
+			num = this.index;
+			fnTab(num);
+		}
+	}
+	function hover(ul){
+		var oLi = ul.getElementsByTagName('li');
+		for(var i=0;i<oLi.length;i++){
+			oLi[i].onmouseover = function(){
+				this.getElementsByTagName('a')[0].style.display = 'none';
+				this.getElementsByTagName('div')[0].style.display = 'block';
+			}
+			oLi[i].onmouseout = function(){
+				this.getElementsByTagName('a')[0].style.display = 'block';
+				this.getElementsByTagName('div')[0].style.display = 'none';
+			}
+		}
+
+	}
+	for(var i=0;i<aUl.length;i++){
+		hover(aUl[i]);
+	}
+}
+</script>
+</head>
+<body>
+	<div id="ranking">
+		<h2>观看排行榜</h2>
+		<ul id="tabNav">
+			<li class="active">每日</li>
+			<li>每周</li>
+			<li>全部</li>
+		</ul>
+		<div id="tabContent">
+			<ul id="daily" class="show">
+				<li>
+					<span>1</span>
+					<a href="#">解密：关于地球与人类的一千零一问</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>解密：关于地球与人类的一千零一问</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>2</span>
+					<a href="#">经典传奇：探索全世界重大历史事件</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>3</span>
+					<a href="#">眼界：展现普通人的曲折命运和动人...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>眼界：展现普通人的曲折命运和动人...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>4</span>
+					<a href="#">档案（BTV）：惊人事件和传奇背...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>档案（BTV）：惊人事件和传奇背...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>5</span>
+					<a href="#">世界十最：30个震惊世界的Top...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>世界十最：30个震惊世界的Top...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>6</span>
+					<a href="#">身边的毛泽东：警卫员解密毛泽东秘...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>身边的毛泽东：警卫员解密毛泽东秘...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>7</span>
+					<a href="#">新电影传奇：每一步电影都有自己的...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>新电影传奇：每一步电影都有自己的...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>8</span>
+					<a href="#">档案（上视纪实频道）：解密档案中...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>档案（上视纪实频道）：解密档案中...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>9</span>
+					<a href="#">探寻传世国宝的千古传奇</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>探寻传世国宝的千古传奇</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>10</span>
+					<a href="#">纪实系列：讲述社会百态，透视事实...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>纪实系列：讲述社会百态，透视事实...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<a href="">更多>></a>
+				</li>
+			</ul>
+			<ul id="monthly">
+				<li>
+					<span>1</span>
+					<a href="#">每月：关于地球与人类的一千零一问</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>解密：关于地球与人类的一千零一问</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>2</span>
+					<a href="#">每月：探索全世界重大历史事件</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>3</span>
+					<a href="#">每月：展现普通人的曲折命运和动人...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>眼界：展现普通人的曲折命运和动人...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>4</span>
+					<a href="#">每月（BTV）：惊人事件和传奇背...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>档案（BTV）：惊人事件和传奇背...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>5</span>
+					<a href="#">每月：30个震惊世界的Top...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>世界十最：30个震惊世界的Top...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>6</span>
+					<a href="#">，每月：警卫员解密毛泽东秘...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>身边的毛泽东：警卫员解密毛泽东秘...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>7</span>
+					<a href="#">每月:每一步电影都有自己的...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>新电影传奇：每一步电影都有自己的...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>8</span>
+					<a href="#">每月档案：解密档案中...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>档案（上视纪实频道）：解密档案中...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>9</span>
+					<a href="#">每月：探寻传世国宝的千古传奇</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>探寻传世国宝的千古传奇</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>10</span>
+					<a href="#">每月系列：讲述社会百态，透视事实...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>纪实系列：讲述社会百态，透视事实...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<a href="">每月更多>></a>
+				</li>
+			</ul>
+			<ul id="all">
+				<li>
+					<span>1</span>
+					<a href="#">全部：关于地球与人类的一千零一问</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>解密：关于地球与人类的一千零一问</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>2</span>
+					<a href="#">全部传奇：探索全世界重大历史事件</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>3</span>
+					<a href="#">全部：展现普通人的曲折命运和动人...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>眼界：展现普通人的曲折命运和动人...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>4</span>
+					<a href="#">全部（BTV）：惊人事件和传奇背...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>档案（BTV）：惊人事件和传奇背...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>5</span>
+					<a href="#">全部十最：30个震惊世界的Top...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>世界十最：30个震惊世界的Top...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>6</span>
+					<a href="#">全部：警卫员解密毛泽东秘...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>身边的毛泽东：警卫员解密毛泽东秘...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>7</span>
+					<a href="#">全部：每一步电影都有自己的...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>新电影传奇：每一步电影都有自己的...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>8</span>
+					<a href="#">全部（上视纪实频道）：解密档案中...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>档案（上视纪实频道）：解密档案中...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>9</span>
+					<a href="#">全部探寻传世国宝的千古传奇</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>探寻传世国宝的千古传奇</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<span>10</span>
+					<a href="#">全部系列：讲述社会百态，透视事实...</a>
+					<div>
+						<img src="img/pen.png"/>
+						<p>纪实系列：讲述社会百态，透视事实...</p>
+						<a href="#">播放</a>
+					</div>
+				</li>
+				<li>
+					<a href="">全部更多>></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

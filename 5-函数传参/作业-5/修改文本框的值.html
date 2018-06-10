@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>修改文本框的值</title>
+<style type="text/css">
+li p{
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	line-height: 30px;
+	display: inline-block; /*使其变成行内元素，则可以使图片和p在同一行*/
+}
+div{
+	margin: 10px auto;
+	width:400px;
+	height:600px;
+}
+img{
+	width: 20px;
+    height: 20px;
+    cursor: inherit; /*箭头形式*/
+}
+h2{
+	background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+	padding: 0;
+	margin: 0;
+	color: white;
+}
+ul li{
+	list-style: none;
+	text-indent: 0px;
+	border-bottom: 1px solid black;
+	color: #ccc;
+	margin-left: -40px;
+	height: 35px;
+}
+ul{margin-top: 5px;}
+span{cursor: pointer;}
+.hide{display: none;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var aUl = document.getElementsByTagName('ul')[0];
+	var aLi = aUl.getElementsByTagName('li');
+	var aImg = aUl.getElementsByTagName('img');
+	var aSpan = aUl.getElementsByTagName('span');
+	var aIpt = aUl.getElementsByTagName('input');
+	var aP = aUl.getElementsByTagName('p');
+
+	//初始化
+	for(var i=0; i<aIpt.length; i++){
+		aIpt[i].className = 'hide';
+	}
+	for(var i=0; i<aSpan.length; i++){
+		aSpan[i].className = 'hide';
+	}
+	for(var i=0; i<aLi.length;i++){
+		revise(aLi[i]);
+	}
+
+	function revise(li){
+		var oP = li.getElementsByTagName('p')[0];
+		var oImg = li.getElementsByTagName('img')[0];
+		var oInput = li.getElementsByTagName('input')[0];
+		var oSpan1 = li.getElementsByTagName('span')[0];
+		var oSpan2 = li.getElementsByTagName('span')[1];
+
+		oImg.onclick = function(){
+			oP.className = oImg.className = 'hide';
+			oInput.className = oSpan1.className = oSpan2.className = '';
+			oInput.value = oP.innerHTML;  //使文本框里有初始值
+		}
+		oSpan1.onclick = function(){
+			oP.innerHTML = oInput.value;
+			oP.className = oImg.className = '';
+			oInput.className = oSpan1.className = oSpan2.className = 'hide';
+		}
+		oSpan2.onclick = function(){
+			oP.className = oImg.className = '';
+			oInput.className = oSpan1.className = oSpan2.className = 'hide';
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<div>
+		<h2>分类</h2>
+		<ul>
+			<li>
+				<p>远程课堂</p>
+				<img src="img/pen.png"alt="pen">
+				<input type="text" value=''/>
+				<span>保存</span>
+				<span>取消</span>
+			</li>
+			<li>
+				<p>远程课堂</p>
+				<img src="img/pen.png"alt="pen">
+				<input type="text" value=''/>
+				<span>保存</span>
+				<span>取消</span>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
