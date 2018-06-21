@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>百度音乐全选</title>
+<style type="text/css">
+html body ul{margin: 0;padding: 0;}
+#songs{
+	width: 500px;
+	margin:20px auto;
+	border: 1px solid #eee;
+	font-size: 15px;
+}
+li{list-style: none;height:24px;}
+#list li{height: 30px;line-height: 30px;}
+#toolbar{
+	border-top: 1px solid #DEDEDE;
+	border-bottom: 2px solid #424242;
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+}
+#toolbar li{
+	float:left;
+	width: 120px;
+	text-align: left;
+}
+#toolbar .button{
+	width: 60px;
+    height: 20px;
+    margin: 7px 5px;
+    text-align: center;
+    line-height: 25px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    opacity: 0.3; 
+    padding-left: 10px;
+}
+#favorite{background: url('img/favorite.gif') no-repeat 5px center;}
+#add{background: url('img/add.png') no-repeat 5px center;}
+#delete{background: url('img/delete.png') no-repeat 5px center;}
+#list .title{
+	display: inline-block;
+	width: 300px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oList = document.getElementById('list');
+	var aLi = oList.getElementsByTagName('li');
+	var aCheckbox = oList.getElementsByTagName('input');
+	var oToolbar = document.getElementById('toolbar');
+	var aBtn = oToolbar.getElementsByTagName('div');
+	var oCheckAll = oToolbar.getElementsByTagName('input')[0];
+	var flag = 0;
+	var num;
+	var origincolor =[];
+
+	//初始化设置底色
+	for(var i=0;i<aLi.length;i++){
+		if(i%2){
+			aLi[i].style.background = '#FFFFFF';
+		}else{
+			aLi[i].style.background = '#F7FFFF';
+		}
+		origincolor[i] = aLi[i].style.background;
+	}
+
+	//设置鼠标移动效果
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].index = i;
+		aLi[i].onmouseover = function(){
+			this.style.background = '#eee';
+		}
+		aLi[i].onmouseout = function(){
+			if(!aCheckbox[this.index].checked){  //如果没有被选中
+				this.style.background = origincolor[this.index];
+			}
+		}
+	}
+
+	//设置选中效果
+	for(var i=0;i<aCheckbox.length;i++){
+		aCheckbox[i].index = i;
+		aCheckbox[i].onclick = function(){
+			num = this.index;
+			flag =0;
+			for(var i=0;i<aCheckbox.length;i++){
+				flag += Number(aCheckbox[i].checked);
+			}
+			if(flag == aCheckbox.length){
+				oCheckAll.checked = true;
+			}else{
+				oCheckAll.checked = false;
+			}
+			if(!flag){
+				for(var i=0;i<aBtn.length;i++){
+					aBtn[i].style.opacity = 0.3;
+				}
+			}else{
+				for(var i=0;i<aBtn.length;i++){
+					aBtn[i].style.opacity = 1;
+				}
+			}
+			if(this.checked){
+				aLi[num].style.background = '#eee';
+			}else{
+				aLi[num].style.background = origincolor[num];
+			}
+		}
+	}
+
+	//设置全选效果
+	oCheckAll.onclick = function(){
+		if(!this.checked){  //如果没有被全选
+			for(var i=0;i<aCheckbox.length;i++){
+				aCheckbox[i].checked = false;
+				aLi[i].style.background = origincolor[i];
+			}
+			for(var i=0;i<aBtn.length;i++){
+				aBtn[i].style.opacity = '0.3';
+			}
+		}else{
+			for(var i=0;i<aCheckbox.length;i++){
+				aCheckbox[i].checked = true;
+				aLi[i].style.background = '#eee';
+			}
+			for(var i=0;i<aBtn.length;i++){
+				aBtn[i].style.opacity = '1';
+			}
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<div id="songs">
+		<ul id="list">
+			<li>
+				<input type="checkbox">
+				<span class="title">That girl</span>
+				<span class="singer">Olly Murs</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">Let her go</span>
+				<span class="singer">Passenger</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">500 Miles</span>
+				<span class="singer">The Journeymen</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">Lucky</span>
+				<span class="singer">Lenka</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">Counting Stars</span>
+				<span class="singer">OneRepublic</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">We are young</span>
+				<span class="singer">Fun</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">Someone like you</span>
+				<span class="singer">Adele</span>
+			</li>
+		</ul>
+		<ul id="toolbar">
+			<li><input type="checkbox">全选</li>
+			<li><div class="button" id="favorite">收藏</div></li>
+			<li><div class="button" id="add">添加</div></li>
+			<li><div class="button" id="delete">删除</div></li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>运算符控制</title>
+<style type="text/css">
+li{list-style: none;height: 25px;margin-bottom: 3px;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oList = document.getElementById('list');
+	var aLi = oList.getElementsByTagName('li');
+	//var ali = document.getElementsByTagName('li');
+	var arrColor = ['yellow','red','blue'];
+	var flag = new Array(aLi.length);//建立一个数组
+
+	for(var i=0;i<aLi.length;i++){
+		flag[i]=0;
+	}
+
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].index = i;//设立索引值
+		aLi[i].style.background = arrColor[i%arrColor.length];
+
+		aLi[i].onmouseover = function(){
+			if(!flag[this.index]){
+				this.style.background = 'grey';
+			}
+		}
+		aLi[i].onmouseout = function(){
+			if(!flag[this.index]){
+				this.style.background = arrColor[this.index%arrColor.length];
+			}
+		}
+		aLi[i].onclick = function(){
+			this.style.background = 'black';
+			flag[this.index] = 1;
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<ul id="list">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</body>
+</html>

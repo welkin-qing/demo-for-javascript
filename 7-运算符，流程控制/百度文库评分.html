@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>百度文库评分</title>
+<style type="text/css">
+p{
+	width:300px;
+	margin:50px auto;
+	border:1px solid black;
+	padding: 10px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oCri = document.getElementById('critic');
+	var aA = document.getElementsByTagName('a');
+	var oText = document.getElementById('text');
+	var arrImg = ['img/nst.gif', 'img/nsg.gif', 'img/sth.gif', 'img/st.gif'];
+	var num = 0;
+	var lastimgArr = [];
+	var lastcomment = '&nbsp;&nbsp;&nbsp;'
+
+	function fn1(index,imgsrc){
+		for(var i=0;i<=index;i++){
+			aA[i].getElementsByTagName('img')[0].src = imgsrc;
+		}
+		switch(index){
+			case 0 :oText.innerHTML = '极差';break;
+			case 1 :oText.innerHTML = '较差';break;
+			case 2 :oText.innerHTML = '一般';break;
+			case 3 :oText.innerHTML = '还行';break;
+			case 4 :oText.innerHTML = '优秀';break;
+		}
+	}
+	for(var i=0;i<aA.length;i++){
+		aA[i].index = i;
+		aA[i].onmouseover = function(){
+			num = this.index;
+			for(var i=0;i<aA.length;i++){
+				lastimgArr[i] = aA[i].getElementsByTagName('img')[0].src;
+			}
+			fn1(aA.length-1,arrImg[0]);
+			if(num<2){
+				fn1(num,arrImg[1]);
+			}else{
+				fn1(num,arrImg[2]);
+			}
+		}
+		aA[i].onmouseout = function(){
+			for(var i=0;i<aA.length;i++){
+				aA[i].getElementsByTagName('img')[0].src = lastimgArr[i];
+			}
+			oText.innerHTML = lastcomment;
+		}
+		aA[i].onclick = function(){
+			num = this.index;
+			fn1(aA.length-1,arrImg[0]);
+			if(num<2){
+				fn1(num,arrImg[1]);
+			}else{
+				fn1(num,arrImg[3]);
+			}
+			for(var i=0;i<aA.length;i++){
+				lastimgArr[i] = aA[i].getElementsByTagName('img')[0].src;
+			}
+			lastcomment = oText.innerHTML;
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<p>
+		我的评分:
+		<span id="critic">
+			<a href="javascript:"><img src="img/nst.gif"></a>
+			<a href="javascript:"><img src="img/nst.gif"></a>
+			<a href="javascript:"><img src="img/nst.gif"></a>
+			<a href="javascript:"><img src="img/nst.gif"></a>
+			<a href="javascript:"><img src="img/nst.gif"></a>
+		</span>
+		<span id="text">&nbsp;&nbsp;&nbsp;</span>
+	</p>
+</body>
+</html>
