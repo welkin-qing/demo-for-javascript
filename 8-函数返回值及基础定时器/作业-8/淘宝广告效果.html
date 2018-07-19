@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>淘宝商品广告效果</title>
+<style type="text/css">
+html,body,ul{margin: 0;padding: 0;}
+li{
+	list-style: none;
+	border: 1px solid #ccc;
+	width: 40px;
+	padding: 5px;
+	font-size: 13px;
+	text-align: center;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+a{text-decoration: none;color: black;}
+#right{float: right;margin-top: -237px;}
+#wrap{
+	width:340px;
+	height:240px;
+	margin: 20px auto;
+	border: 1px solid black;
+	padding: 5px;
+}
+img{
+	float: left;
+    width: 200px;
+    height: 200px;
+    margin-top: -220px;
+    border: 1px solid #ccc;
+    margin-left: 70px
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oLeft = document.getElementById('left');
+	var oRight = document.getElementById('right');
+	var aLli = oLeft.getElementsByTagName('li');
+	var aRli = oRight.getElementsByTagName('li');
+	var aLi = document.getElementsByTagName('li');
+
+	var imgLeft = ['img/dx.jpg','img/tz.jpg','img/nzk.jpg','img/wt.jpg','img/ydy.jpg','img/px.jpg','img/wqx.jpg'];
+	var imgRight = ['img/fsy.jpg','img/xxx.jpg','img/fbx.jpg','img/bb.jpg','img/hs.jpg','img/yy.jpg','img/lx.jpg'];
+
+	function cleanAll(){
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].style.background = '#294A73';
+			aLi[i].getElementsByTagName('a')[0].style.color = 'white';
+		}
+	}
+	for(var i=0;i<aLli.length;i++){
+		aLli[i].onmouseover = function(){
+			cleanAll();
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="left">
+			<li><a href="#">短袖</a></li>
+			<li><a href="#">套装</a></li>
+			<li><a href="#">牛仔裤</a></li>
+			<li><a href="#">外套</a></li>
+			<li><a href="#">运动衣</a></li>
+			<li><a href="#">皮鞋</a></li>
+			<li><a href="#">网球鞋</a></li>
+		</ul>
+		<img src="img/dx.jpg">
+		<ul id="right">
+			<li><a href="#">防晒衣</a></li>
+			<li><a href="#">休闲鞋</a></li>
+			<li><a href="#">帆布鞋</a></li>
+			<li><a href="#">包包</a></li>
+			<li><a href="#">婚纱</a></li>
+			<li><a href="#">泳衣</a></li>
+			<li><a href="#">凉鞋</a></li>
+		</ul>
+	</div>
+</body>
+</html>

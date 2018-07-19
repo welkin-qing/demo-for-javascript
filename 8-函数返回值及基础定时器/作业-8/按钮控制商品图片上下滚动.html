@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>按钮控制商品图片上下滚动</title>
+<style type="text/css">
+html,body,h2,h3,p,ul,a{padding: 0;margin: 0;}
+h2{
+	background: #294A73;
+	width:195px;
+	height: 20px;
+	padding: 2.5px;
+	margin: 20px auto;
+	font-size: 15px;
+	color: white;
+	line-height: 20px;
+	border: 1px solid black;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+h2 a{
+	text-decoration: none;
+	color:white;
+	float: right;
+
+}
+li{
+	list-style: none;
+    border-bottom: 1px solid #A4A4A4;
+    padding: 10px;
+    padding-bottom: 5px;
+    position: relative;
+    top: -15px;
+}
+#container{
+	width: 180px;
+	height: 450px;
+	margin: -20px auto;
+	border:1px solid black;
+	padding: 20px 10px;
+	overflow: hidden;
+}
+#container ul{position: relative;top:0;}
+h3{font-size: 15px;}
+#container p{font-size: 13px;width: 80px;}
+.time{color: gray;margin-top: 10px;}
+#container img{
+	width: 65px;
+    height: 65px;
+    position: absolute;
+    top: 10px;
+    left: 105px;
+    border: 1px solid #ccc;
+}
+#up,#down{width: 200px;height: 20px;z-index: 1;cursor: pointer;}
+#up{
+	background: url(img/up.png) no-repeat center center #EFEFE7;
+    position: relative;
+    top: -20px;
+    left: -10px;
+}
+#down{
+	background: url(img/down.png) no-repeat center center #EFEFE7;
+	position: absolute;
+    top: 518px;
+    margin-left: -10px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oUp = document.getElementById('up');
+	var oDown = document.getElementById('down');
+	var oUl = document.getElementsByTagName('ul')[0];
+	var timerUp = null;
+	var timerDown = null;
+
+	oUp.onmouseover = oDown.onmouseover = over;
+	oUp.onmouseout = oDown.onmouseout = out;
+	function over(){
+		this.style.backgroundColor = '#E7EFEF';
+	}
+	function out(){
+		this.style.backgroundColor = '#EFEFE7';
+	}
+	//控制上下滚动
+	var sp = 0;  
+	oUp.onclick = function(){
+		clearInterval(timerUp);
+		clearInterval(timerDown);
+		timerUp = setInterval(function(){
+			sp++;
+			oUl.style.top = -sp + 'px';
+			if(sp >= 200){  //该距离可通过截图观察像素
+				clearInterval(timerUp);
+		        oUl.style.top=-200+'px';
+			}
+		},14)
+	}
+	oDown.onclick = function(){
+		clearInterval(timerDown);
+		clearInterval(timerUp);
+		timerDown = setInterval(function(){
+			sp--;
+			oUl.style.top = -sp + 'px';
+			if(sp<0){
+				clearInterval(timerDown);
+				oUl.style.top = '0px';
+			}
+		},14)
+	}
+}
+</script>
+</head>
+<body>
+	<h2>妙味课堂<a href="#">>>更多</a></h2>
+	<div id="container">
+		<div id="up"></div>
+		<ul>
+			<li>
+				<h3>标题一</h3>
+				<p>运动时尚</p>
+				<p class="time">12:35</p>
+				<img src="img/ydy.jpg">
+			</li>
+			<li>
+				<h3>标题二</h3>
+				<p>休闲潮流</p>
+				<p class="time">10:40</p>
+				<img src="img/xxx.jpg">
+			</li>
+			<li>
+				<h3>标题三</h3>
+				<p>运动舒适</p>
+				<p class="time">00:55</p>
+				<img src="img/wqx.jpg">
+			</li>
+			<li>
+				<h3>标题四</h3>
+				<p>时尚潮流</p>
+				<p class="time">8:00</p>
+				<img src="img/fsy.jpg">
+			</li>
+			<li>
+				<h3>标题五</h3>
+				<p>摩登女郎</p>
+				<p class="time">9:15</p>
+				<img src="img/tz.jpg">
+			</li>
+			<li>
+				<h3>标题六</h3>
+				<p>都市潮流</p>
+				<p class="time">7:55</p>
+				<img src="img/px.jpg">
+			</li>
+			<li>
+				<h3>标题七</h3>
+				<p>夏日更新</p>
+				<p class="time">9:40</p>
+				<img src="img/lx.jpg">
+			</li>
+			<li>
+				<h3>标题八</h3>
+				<p>清新时尚</p>
+				<p class="time">8:00</p>
+				<img src="img/wqx.jpg">
+			</li>
+		</ul>
+		<div id="down"></div>
+	</div>
+</body>
+</html>

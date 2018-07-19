@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>延时消失的菜单</title>
+<style type="text/css">
+body div{padding: 0;margin: 0;}
+a{text-decoration: none;}
+#header{
+	width:500px;
+	height: 50px;
+	background: #4273A5;
+	margin: 10px auto;
+	border-radius: 50px;
+}
+#nav a{    
+	color: white;
+    font-size: 18px;
+    line-height: 45px;
+    padding-left: 30px;
+}
+#nav a:hover{color:#B0C4DE;}
+ul{list-style: none;background: #E3ECF1;padding: 20px;width:500px;border-radius: 50px;display: none;}
+li{
+	float:left;    
+	margin-top: -10px;
+	border-bottom: 1px solid #A4A4A4;
+}
+li a{
+	color:#3C6EA8;
+	padding: 0 15px;
+	border-right:1px solid #8F77C3;
+	font-size: 17px;
+}
+li a:hover{text-decoration: underline;}
+li:last-child a {border-right: none;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oNav = document.getElementById('nav');
+	var aA = oNav.getElementsByTagName('a');
+	var aUl = document.getElementsByTagName('ul');
+	var showArr = ['home','about','showcase','blog'];
+	var timer = null;
+	var num = 0;
+
+	for(var i=0;i<aA.length-1;i++){
+		show(i);
+	}
+	function show(num){	
+		aA[num].onmouseover = function(){
+			if(timer) clearTimeout(timer);
+			for(var j=0;j<aUl.length;j++){
+				aUl[j].style.display='none';
+			}
+			aUl[num].style.display = 'block';
+		}
+		aA[num].onmouseout = function(){
+			timer=setTimeout(function(){aUl[num].style.display="none";},1500);
+		}
+		aUl[num].onmouseover = function(){
+			if(timer) clearTimeout(timer);
+			for(var j=0;j<aUl.length;j++){
+				aUl[j].style.display='none';
+			}
+			aUl[num].style.display = 'block';
+		}
+		aUl[num].onmouseout = function(){
+			timer=setTimeout(function(){aUl[num].style.display="none";},1500);
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<div id="header">
+		<div id="nav">
+			<a href="javascript:">首页</a>
+			<a href="javascript:">关于</a>
+			<a href="javascript:">作品</a>
+			<a href="javascript:">博客</a>
+			<a href="javascript:" style="padding-left:120px;">更多<<</a>
+		</div>
+		<ul id="home">
+			<li><a href="#">最近更新</a></li>
+			<li><a href="#">最近活动</a></li>
+			<li><a href="#">报名试听</a></li>
+			<li><a href="#">学员反馈</a></li>
+		</ul>
+		<ul id="about">
+			<li><a href="#">妙味课堂</a></li>
+			<li><a href="#">培训方式</a></li>
+			<li><a href="#">培训理念</a></li>
+			<li><a href="#">关于我们</a></li>
+		</ul>
+		<ul id="showcase">
+			<li><a href="#">般固</a></li>
+			<li><a href="#">MATRIX</a></li>
+			<li><a href="#">留学E网</a></li>
+			<li><a href="#">ECMall</a></li>
+		</ul>
+		<ul id="blog">
+			<li><a href="#">JS教程</a></li>
+			<li><a href="#">弹出层效果</a></li>
+			<li><a href="#">3D球面标签云</a></li>
+			<li><a href="#">Windows计算器</a></li>
+		</ul>
+	</div>
+</body>
+</html>
