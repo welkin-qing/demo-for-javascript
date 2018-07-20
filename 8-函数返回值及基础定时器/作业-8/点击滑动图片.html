@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>点击滑动图片</title>
+<style type="text/css">
+html,body,a{margin: 0;padding: 0;}
+#div1{
+	width:340px;
+	height: 200px;
+	margin: 20px auto;
+	border: 1px solid black;
+	position: relative;
+	z-index: 1;
+}
+#div1 img{
+	width: 260px;
+	height: 200px;
+	position: absolute;
+	top: 0;
+	left: 40px;
+	transition:1s;
+}
+#div1 a{    
+	text-decoration: none;
+    width: 40px;
+    height: 40px;
+    background: #ccc;
+    position: absolute;
+    top: 80px;
+    font-size: 35px;
+    color: black;
+    line-height: 40px;
+    text-align: center;
+    z-index: 5;
+}
+.next{
+	left: 300px;
+}
+#text{
+	width: 300px;
+    height: 100px;
+    border: 10px solid #999;
+    background: #fff;
+    text-align: center;
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(50% - 50px);
+    z-index: 3;
+    display: none;
+}
+#bg { 
+	width:100%; 
+	height:100%; 
+	background:#000; 
+	opacity:0.3; 
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	display: none;
+}
+</style>
+<script type="text/javascript">
+window.onload = function() {
+	var oDiv = document.getElementById('div1');
+	var aA = oDiv.getElementsByTagName('a');
+	var aImg = oDiv.getElementsByTagName('img');
+	var oText = document.getElementById('text');
+	var oBg = document.getElementById('bg');
+	var oBtn = oText.getElementsByTagName('input')[0];
+
+	var sign = 1;
+	var flag = 0;
+
+	for(var i=0; i<aImg.length;i++){
+		aImg[i].style.zIndex = aImg.length - i;
+	}
+	aA[0].onclick = function(){
+		sign = -1;
+		doMove();
+	}
+	aA[1].onclick = function () {
+		sign = 1;
+		doMove();
+	}
+	oBtn.onclick = function(){
+		oBg.style.display = oText.style.display = 'none';
+		for(var i=0;i<aImg.length;i++){
+			aImg[i].style.left = '40px';
+			aImg[i].style.opacity = 1;
+		}
+		flag = 0;
+	}
+	function doMove() {
+		if ( flag < aImg.length-1 ) {
+			aImg[flag].style.left = sign*260 + 'px';
+			aImg[flag].style.opacity = 0;
+			flag++;
+		}else {
+			fnReset();
+		}
+	}
+
+	function  fnReset() {
+		oBg.style.display = oText.style.display = 'block';
+	}
+}
+</script>
+</head>
+<body>
+	<div id="div1">
+	<a href="javascript:;" class="prev"><</a>
+	<a href="javascript:;" class="next">></a>
+	<img src="img/xxx.jpg" width="280" height="180" />
+	<img src="img/fbx.jpg" width="280" height="180" />
+	<img src="img/px.jpg" width="280" height="180" />
+	<img src="img/lx.jpg" width="280" height="180" />
+</div>
+<div id="text">
+	<p>再来一次？</p>
+	<input type="button" value="重来" />
+</div>
+<div id="bg"></div>
+</body>
+</html>

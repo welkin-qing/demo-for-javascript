@@ -40,21 +40,63 @@ window.onload = function(){
 	var aLli = oLeft.getElementsByTagName('li');
 	var aRli = oRight.getElementsByTagName('li');
 	var aLi = document.getElementsByTagName('li');
+	var oImg = document.getElementsByTagName('img')[0];
+
+	var timer = null;
+	var num = 0;
+	var flag = 0;
 
 	var imgLeft = ['img/dx.jpg','img/tz.jpg','img/nzk.jpg','img/wt.jpg','img/ydy.jpg','img/px.jpg','img/wqx.jpg'];
 	var imgRight = ['img/fsy.jpg','img/xxx.jpg','img/fbx.jpg','img/bb.jpg','img/hs.jpg','img/yy.jpg','img/lx.jpg'];
 
+	//移入时图片切换
 	function cleanAll(){
 		for(var i=0;i<aLi.length;i++){
-			aLi[i].style.background = '#294A73';
-			aLi[i].getElementsByTagName('a')[0].style.color = 'white';
+			aLi[i].style.background = 'white';
+			aLi[i].getElementsByTagName('a')[0].style.color = 'black';
 		}
+	}
+	function hide(){
+		this.style.background = 'white';
+		this.getElementsByTagName('a')[0].style.color = 'black';
+		timer = setInterval(play, 1000);
 	}
 	for(var i=0;i<aLli.length;i++){
-		aLli[i].onmouseover = function(){
+		aLli[i].index = aRli[i].index = i;
+		aLli[i].onmouseover = function()
+		{
+			clearInterval(timer);
 			cleanAll();
+			this.style.background = '#294A73';
+			this.getElementsByTagName('a')[0].style.color = 'white';
+			oImg.src = imgLeft[this.index];
+		}
+		aRli[i].onmouseover = function(){
+			clearInterval(timer);
+			cleanAll();
+			this.style.background = '#294A73';
+			this.getElementsByTagName('a')[0].style.color = 'white';
+			oImg.src = imgRight[this.index];
+		}
+		aLli[i].onmouseout = aRli[i].onmouseout = hide;
+	}
+
+	//利用num控制自动切换
+	function play(){
+		cleanAll();
+		if(flag == 0){
+			aLli[num].style.background = '#294A73';
+			aLli[num].getElementsByTagName('a')[0].style.color = 'white';
+			oImg.src = imgLeft[num];
+			num == aLli.length - 1 ? flag = 1 : num ++;//若表达式为真flag=1；否则num++
+		}else{
+			aRli[num].style.background = '#294A73';
+			aRli[num].getElementsByTagName('a')[0].style.color = 'white';
+			oImg.src = imgRight[num];
+			num == 0 ? flag = 0 : num--;
 		}
 	}
+	timer = setInterval(play, 1000);
 }
 </script>
 </head>

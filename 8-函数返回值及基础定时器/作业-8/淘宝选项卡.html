@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>淘宝选项卡</title>
+<style type="text/css">
+html,ul{padding: 0;margin: 0;}
+li{list-style: none;}
+img{width: 50px;height:50px;}
+#tab{
+	width: 300px;
+	height: 200px;
+	background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+	margin: 20px auto;
+	border: 1px solid black;
+	padding: 10px;
+}
+.nav{height: 30px}
+.nav li{
+	width: 80px;
+    float: left;
+    background-image: linear-gradient(-225deg, #DFFFCD 0%, #90F9C4 48%, #39F3BB 100%);
+    margin-right: 1px;
+    padding: 3px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 17px;
+    border: 1px solid black;
+}
+.nav .active{
+	background-image: linear-gradient(to top, #007adf 0%, #00ecbc 100%);
+	color: white;
+}
+.box{    
+	width: 300px;
+    margin-top: 10px;
+}
+.box img{
+	width:200px;
+	height:150px;
+	margin-top: 1px;
+	border: 1px solid black;
+}
+.box ul{width: 95px;float: right;}
+.box li{
+	height: 45px;
+    background-image: linear-gradient(-225deg, #69EACB 0%, #EACCF8 48%, #6654F1 100%);
+    margin-top: 5px;
+    line-height: 45px;
+    text-align: center;
+    font-size: 19px;
+}
+.box .active{background-image: linear-gradient(-45deg, #FFC796 0%, #FF6B95 100%);}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oTab = document.getElementById('tab');
+	var oUl = oTab.getElementsByTagName('ul')[0];
+	var aLi = oUl.getElementsByTagName('li');
+	var aBox = oTab.getElementsByTagName('div');
+	var imgArr=[
+		['img/xxx.jpg','img/fbx.jpg','img/wqx.jpg'],
+		['img/dx.jpg','img/tz.jpg','img/wt.jpg']
+	];
+
+	var num =0;
+	var flag = 0;
+	function show(){
+		num++;
+		if(num == 3){
+			num = 0;
+			flag = flag == 0?1:0
+		}
+		var ali = aBox[flag].getElementsByTagName('li');
+		var oImg = aBox[flag].getElementsByTagName('img')[0];
+		//标题li的变化
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].className = '';
+			aBox[i].style.display = 'none';
+		}
+		aLi[flag].className = 'active';
+		aBox[flag].style.display = 'block';
+
+		//图片li的切换
+		for(var i=0 ;i<ali.length;i++){
+			ali[i].className = '';
+		}
+		ali[num].className = 'active';
+		oImg.src = imgArr[flag][num];
+	}
+	setInterval(show,1500);
+}
+</script>
+</head>
+<body>
+	<div id="tab">
+		<ul class="nav">
+			<li class="active">菜单一</li>
+			<li>菜单二</li>
+		</ul>
+		<div class="box">
+			<img src="img/xxx.jpg">
+			<ul>
+				<li class="active">图片1</li>
+				<li>图片2</li>
+				<li>图片3</li>
+			</ul>
+		</div>
+		<div class="box" style="display:none;">
+			<img src="img/xxx.jpg">
+			<ul>
+				<li>图片1</li>
+				<li>图片2</li>
+				<li>图片3</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
