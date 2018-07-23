@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>新浪数码频道选项卡</title>
+<style type="text/css">
+body,ul,li,p,h2{padding: 0;margin: 0;}
+li{list-style: none;float: left;}
+h2 { font-size: 14px; font-weight: normal; text-align: center;}
+ul{overflow: hidden;position: relative;}
+#wrap{
+	width: 800px;
+	height: 300px;
+	background: #D6EFF7;
+	border: 1px solid #73BDEF;
+	margin: 40px auto;
+	padding: 10px;
+	overflow: hidden;
+	position: relative;
+}
+#tabs{position:relative;left: calc(50% - 100px);}
+#tabs li{
+	background: #EFEFF7;
+	margin-right: 15px;
+	padding: 6px 30px;
+	font-size: 12px; 
+	color: #087B00; 
+	border: 1px solid #A5DEF7;
+}
+#newcoming{width: 800px;height: 280px;}
+.left{
+	width: 270px;
+	height: 270px;
+	background: red;
+	position: relative;
+}
+.left img{width: 270px;height: 240px;}
+.left p{background: #d6eff7;margin-top: 5px;text-align: center;}
+#newcoming, #geek { position: absolute; width: 820px; height: 265px; left: 0; top: 35px; background: #fff;}
+.showbox{
+	width: 530px;
+    height: 270px;
+    background: green;
+    margin-top: -270px;
+    margin-left: 270px;
+}
+.showbox ul { position: absolute; top: 0; left: 0; }
+.showbox li{width: 170px;}
+.showbox img{width: 160px;height: 150px;}
+</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="tabs">
+			<li>新品</li>
+			<li>极客</li>
+		</ul>
+		<div id="newcoming">
+			<div class="left">
+				<img src="img/qyc.jpg">
+				<p>犬夜叉</p>
+			</div>
+			<div class="showbox">
+				<ul>
+					<li>
+						<img src="img/1.jpg">
+						<h2>1</h2>
+						<p>1</p>
+					</li>
+					<li>
+						<img src="img/2.jpg">
+						<h2>2</h2>
+						<p>2</p>
+					</li>
+					<li>
+						<img src="img/3.jpg">
+						<h2>3</h2>
+						<p>3</p>
+					</li>
+					<li>
+						<img src="img/4.jpg">
+						<h2>4</h2>
+						<p>4</p>
+					</li>
+					<li>
+						<img src="img/5.jpg">
+						<h2>5</h2>
+						<p>5</p>
+					</li>
+					<li>
+						<img src="img/6.jpg">
+						<h2>6</h2>
+						<p>6</p>
+					</li>
+					<li>
+						<img src="img/7.jpg">
+						<h2>7</h2>
+						<p>7</p>
+					</li>
+					<li>
+						<img src="img/8.jpg">
+						<h2>8</h2>
+						<p>8</p>
+					</li>
+					<li>
+						<img src="img/9.jpg">
+						<h2>9</h2>
+						<p>9</p>
+					</li>
+				</ul>
+			</div>
+			<ul class="nav">
+				<li class="lf">&lt;</li>
+				<li class="rt">&gt;</li>
+			</ul>
+			<ul class="bullets">
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div id="geek">
+			<div class="left">
+				<img src="img/jg.jpg">
+				<p>二二二二</p>
+			</div>
+			<div class="showbox">
+				<ul>
+					<li>
+						<img src="img/1.jpg">
+						<h2>1</h2>
+						<p>1</p>
+					</li>
+					<li>
+						<img src="img/2.jpg">
+						<h2>2</h2>
+						<p>2</p>
+					</li>
+					<li>
+						<img src="img/3.jpg">
+						<h2>3</h2>
+						<p>3</p>
+					</li>
+				</ul>
+			</div>
+			<ul class="nav">
+				<li class="lf">&lt;</li>
+				<li class="rt">&gt;</li>
+			</ul>
+			<ul class="bullets">
+				<li class="active"></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

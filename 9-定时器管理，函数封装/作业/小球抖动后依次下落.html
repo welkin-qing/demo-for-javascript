@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>小球抖动后依次下落</title>
+<style>
+html, body {margin: 0;padding: 0;}
+#wrap {position: relative;background: #eee;width: 430px;height: 600px;margin: 20px auto;border: 1px solid #ccc;}
+</style>
+<script src="demo.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+	var oWrap = document.getElementById('wrap');
+	var aDiv = oWrap.getElementsByTagName('div');
+	var str = '';
+	var len = 24;
+	var num = 0;
+	var n = 0;
+	var timer = null;
+	var arrImg = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg'];
+
+	//生成小球
+	for(var i=0;i<len;i++){
+		str += '<div style="position: absolute; top: ' + (Math.floor(i/6)*70+10) + 'px; left: ' + (i%6*70+10) + 'px; width: 60px; height: 60px; border-radius: 60px; transition: 0.2s; background: url(' + arrImg[i%arrImg.length] + ')"></div>'
+	}
+	oWrap.innerHTML = str;
+	function cleanAll(){
+		for(var i=0;i<aDiv.length;i++){
+			aDiv[i].style.transition = '0s';
+			//将鼠标悬停在一个div元素上，逐步改变表格的宽度从100px到300px：
+			aDiv[i].style.transform = 'scale(1)'
+			//将元素旋转，缩放，移动，倾斜
+		}
+	}
+	for(var i=0;i<aDiv.length;i++){
+		aDiv[i].index = i;
+		aDiv[i].onclick = function(){
+			cleanAll();
+			//生成一个小球运动顺序组成的数组arr
+			var arr = [];
+			arr.push(this.index);
+			if(this.index >=aDiv.length/2){
+				for(var i=1; i<aDiv.length-this.index; i++){
+					arr.push(this.index - i, this.index + i);
+				}
+				for(var j=2*this.index- aDiv.length; j >= 0; j--){
+					arr.push(j);
+				}
+			}else {
+				for(var i=1; i<=this.index; i++){
+					arr.push(this.index - i, this.index + i);
+				}
+				for(var j=2*this.index+1; j<aDiv.length; j++){
+					arr.push(j);
+				}
+			}
+			timer = setInterval(function(){
+				shake(aDiv[arr[num]], 'left', function(){
+					move(aDiv[arr[n]], 'top', 310, 30, 50);
+					n++;
+				});
+				num++;
+				if(num == arr.length){
+					clearInterval(timer);
+				}
+			},50)
+		}
+		aDiv[i].onmouseover = function(){
+			for(var i=0; i<aDiv.length; i++){
+				aDiv[i].style.transform = 'scale(1)';
+				aDiv[i].style.zIndex = '0';
+			}
+			this.style.transform = 'scale(1.5)';
+			this.style.zIndex = '1';
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<div id="wrap"></div>
+</body>
+</html>
