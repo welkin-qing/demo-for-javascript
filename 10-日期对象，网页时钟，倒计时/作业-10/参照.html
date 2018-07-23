@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>倒计时页面</title>
+<style type="text/css">
+.roll { width: 698px; height: 108px; margin: 50px auto 0; position: relative; }  
+.btn_left { display: block; width: 68px; height: 68px; background: url(img/clock.jpg) no-repeat -70px -69px; position: absolute; top: 20px; left: 1px; z-index: 1; }  
+.btn_left:hover { background: url(img/clock.jpg) no-repeat -70px 0; }  
+.btn_right { display: block; width: 68px; height: 68px; background: url(img/clock.jpg) no-repeat 1px -69px; position: absolute; top: 20px; right: 0; z-index: 1; }  
+.btn_right:hover { background: url(img/clock.jpg) no-repeat 1px 0; }  
+.roll .wrap { width: 546px; height: 108px; margin: 0 auto; position: relative; overflow: hidden; }  
+.roll ul { position: absolute; top: 0; left: 0; }  
+.roll li { float: left; width: 182px; height: 108px; text-align: center; }  
+.roll li a:hover { position: relative; top: 2px; }  
+</style>
+<script type="text/javascript">
+window.onload=function()  
+{  
+    var oDiv=document.getElementById('roll');  
+    var oUl=oDiv.getElementsByTagName('ul')[0];  
+    var aLi=oUl.getElementsByTagName('li');  
+    var speed=-4;  
+    var oBtn1=oDiv.getElementsByTagName('a')[0];  
+    var oBtn2=oDiv.getElementsByTagName('a')[1];  
+    var roll_timer=null;  
+  
+      
+    oUl.innerHTML+=oUl.innerHTML;  
+    oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';  
+    roll_timer=setInterval(function(){  
+        oUl.style.left=oUl.offsetLeft+speed+'px';  
+        if(oUl.offsetLeft<-oUl.offsetWidth/2)  
+        {  
+            oUl.style.left=0+'px';  
+        }  
+        else if(oUl.offsetLeft>(0))  
+        {  
+            oUl.style.left=-oUl.offsetWidth/2+'px';  
+        }  
+    },30);  
+    oBtn1.onmouseover=function()  
+    {  
+        speed=-4;  
+    }  
+    oBtn2.onmouseover=function()  
+    {  
+        speed=4;  
+    }  
+    oUl.onmouseover=function()  
+    {  
+        clearInterval(roll_timer);  
+    }  
+    oUl.onmouseout=function()  
+    {  
+        roll_timer=setInterval(function(){  
+        oUl.style.left=oUl.offsetLeft+speed+'px';  
+        if(oUl.offsetLeft<-oUl.offsetWidth/2)  
+        {  
+            oUl.style.left=0+'px';  
+        }  
+        else if(oUl.offsetLeft>(0))  
+        {  
+            oUl.style.left=-oUl.offsetWidth/2+'px';  
+        }  
+      },30);  
+    }  
+};  
+
+</script>
+</head>
+<body>
+	<div class="roll" id="roll">  
+    <a href="javascript:void(0);" class="btn_left"></a>  
+    <a href="javascript:void(0);" class="btn_right"></a>  
+    <div class="wrap">  
+        <ul>  
+            <li><a href="http://www.miaov.com/"><img src="img/1.jpg" /></a></li>  
+            <li><a href="http://www.miaov.com/"><img src="img/2.jpg" /></a></li>  
+            <li><a href="http://www.miaov.com/"><img src="img/3.jpg" /></a></li>  
+            <li><a href="http://www.miaov.com/"><img src="img/4.jpg" /></a></li>  
+        </ul>  
+    </div>  
+</div>  
+</body>
+</html>

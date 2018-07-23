@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>倒计时页面</title>
+<style type="text/css">
+ul{ margin:50px auto; padding:0;position:relative; width:1000px; height:172px; overflow:hidden;}
+li{ float:left; position:relative; width:122px; height:172px;}
+img{ position:absolute;}
+</style>
+<script src="miaov.js"></script>
+<script type="text/javascript">
+function toTwo ( n ) {
+	return n < 10 ?  '0' + n : '' + n;
+}
+window.onload = function  () {
+	var aLi = document.getElementsByTagName('li');
+	var timer = null;
+	var oP = document.getElementById('time');
+
+	for(var i=0;i<aLi.length;i++){
+		var aImg = aLi[i].getElementsByTagName('img');
+		aImg[1].style.top = '172px';
+		aImg[0].style.top = '0px';//页面打开时设置好img1和img2的位置
+	}
+	aLi[2].getElementsByTagName('img')[1].style.top = 0;
+	aLi[5].getElementsByTagName('img')[1].style.top = 0;
+	//刚打开页面的时间
+	var myTime = new Date();
+	var iHours = myTime.getHours();
+	var iMin = myTime.getMinutes();
+	var iSec = myTime.getSeconds();
+	var oldStr = toTwo(iHours)+toTwo(iMin)+toTwo(iSec);
+	aLi[0].getElementsByTagName('img')[0].src = 'img/' + oldStr.charAt(0) + '.JPG';aLi[0].index = parseInt(oldStr.charAt(0));
+	aLi[1].getElementsByTagName('img')[0].src = 'img/' + oldStr.charAt(1) + '.JPG';aLi[1].index = parseInt(oldStr.charAt(1));
+	aLi[3].getElementsByTagName('img')[0].src = 'img/' + oldStr.charAt(2) + '.JPG';aLi[3].index = parseInt(oldStr.charAt(2));
+	aLi[4].getElementsByTagName('img')[0].src = 'img/' + oldStr.charAt(3) + '.JPG';aLi[4].index = parseInt(oldStr.charAt(3));
+	aLi[6].getElementsByTagName('img')[0].src = 'img/' + oldStr.charAt(4) + '.JPG';aLi[6].index = parseInt(oldStr.charAt(4));
+	aLi[7].getElementsByTagName('img')[0].src = 'img/' + oldStr.charAt(5) + '.JPG';aLi[7].index = parseInt(oldStr.charAt(5));
+	fnTime(aLi[7],1);
+	fnTime(aLi[6],2);
+	fnTime(aLi[4],3);
+	fnTime(aLi[3],4);
+	fnTime(aLi[1],5);
+	fnTime(aLi[0],6);
+	var num = 0;
+	function fnTime(aLi,n){
+				
+	var aImg = aLi.getElementsByTagName('img');
+	aImg[0].style.top = 0;
+	var num = 0;
+	
+	timer = setInterval(function(){
+		var myTime = new Date();
+		var iHours = myTime.getHours();
+		var iMin = myTime.getMinutes();
+		var iSec = myTime.getSeconds();
+		var str = toTwo(iHours)+toTwo(iMin)+toTwo(iSec);
+		
+		if(parseInt(str.charAt(str.length-n)) !== aLi.index){ //如果这个时间改变了，才让它移动
+			doMove( aImg[num],'top',10,-172,function endFn(){
+				if(num == 0){aImg[aImg.length-1].style.top = '172px';}
+				else{aImg[num-1].style.top = '172px';}//图片向上移动后再拉回来
+			});
+			num++;num%=aImg.length;
+			aImg[num].src = 'img/' + str.charAt(str.length-n) + '.JPG';//向上移动的图片的src对于arr。charAt的值
+			doMove( aImg[num],'top',10,0);
+			aLi.index = parseInt(str.charAt(str.length-n));
+			//alert(oldStr.charAt(str.length-n));
+		};
+		
+	},1000);};
+	//冒号闪动
+	fnColon(aLi[2]);
+	fnColon(aLi[5]);
+	function fnColon(aLi){
+		var aColon = aLi.getElementsByTagName('img');
+		setInterval(function(){
+			setTimeout(function(){
+			aColon[1].style.display = 'none';
+			setTimeout(function(){
+				aColon[1].style.display = 'block';
+			},500)
+			},500);
+		},1000);
+	};
+}
+</script>
+</head>
+<body>
+	<p id="time" style="font-size:60px;"></p>
+<ul>
+	<li><img src="img/0.JPG" /><img src="img/0.JPG" /> </li>
+	<li><img src="img/0.JPG" /><img src="img/0.JPG" /> </li>
+	<li><img src="img/colon.JPG" /><img src="img/colon2.JPG" /></li>
+	<li><img src="img/0.JPG" /><img src="img/0.JPG" /> </li>
+	<li><img src="img/0.JPG" /><img src="img/0.JPG" /> </li>
+	<li><img src="img/colon.JPG" /><img src="img/colon2.JPG" /></li>
+	<li><img src="img/0.JPG" /><img src="img/0.JPG" /> </li>
+	<li><img src="img/0.JPG" /><img src="img/1.JPG" /></li>
+</ul>
+</body>
+</html>
