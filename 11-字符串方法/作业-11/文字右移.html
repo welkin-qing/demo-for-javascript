@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>文字右移</title>
+<style type="text/css">
+body,div,span,p,a{padding: 0;margin:0;}
+li{list-style: none;}
+a{text-decoration: none;}
+#wrapper{width: 800px;height: 310px;margin: 40px auto;padding: 10px;border: 10px solid #ccc;position: relative;}
+#left{width: 280px;height: 280px;border: 2px solid #ccc;padding: 10px;}
+#right{
+	width: 284px;
+    height: 284px;
+    border: 2px solid #ccc;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+}
+#center{width: 160px;height: 300px;position: absolute;top: 10px;left: 328px;}
+#center a{    
+	width: 80px;
+    height: 32px;
+    background: 	#FFA500;
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: -92px;
+    position: absolute;
+    top: 92px;
+    line-height: 32px;
+    color: white;
+}
+#center a:hover{opacity: 0.4;}
+#all,#current{position: absolute; top: 0px;font-size: 20px;width: 35px;text-align: center;}
+#current{left: -38px;}
+#all{left: 12px;}
+#center p{
+	font-size: 20px;
+    position: absolute;
+    top: 72px;
+    left: 72px;
+}
+#process {
+    width: 150px;
+    height: 20px;
+    margin-top: 105px;
+    margin-left: -32px;
+}
+#process li {
+    width: 15px;
+    height: 15px;
+    float: left;
+    background: #FFA500;
+    margin-right: 2px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oLeft = document.getElementById('left');
+	var oRight = document.getElementById('right');
+	var oCenter = document.getElementById('center');
+	var oBtn = oCenter.getElementsByTagName('a')[0];
+	var oP = document.getElementsByTagName('p')[0];
+	var oProcess = document.getElementById('process');
+	var aLi = oProcess.getElementsByTagName('li');
+	var oCurrent = document.getElementById('current');
+	var oAll = document.getElementById('all');
+	var timer = null;
+
+	oBtn.onclick = function(){
+		if(oLeft.value == ''){
+			alert('请输入文字！');
+			return;
+		}else{
+			move();
+		}
+	}
+	function move(){
+		var n = 0;
+		oRight.innerHTML = "";
+		var len = oLeft.value.length;
+		//alert(1);
+		timer = setInterval(function(){
+			var arr = oLeft.value.split('');
+			oRight.innerHTML+=arr.shift();
+			oLeft.value = arr.join("");
+			oCurrent.innerHTML = oRight.innerHTML.length;
+			oAll.innerHTML = len;
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].style.opacity = 1;
+			}
+			aLi[n%aLi.length].style.opacity = 0.4;
+			n++;
+            if(n>=len){
+                clearInterval(timer);
+                len = 0;
+                for(var i=0;i<aLi.length;i++){
+                	aLi[i].style.opacity = 1;
+                }
+            }
+		},100);
+	}
+}
+</script>
+</head>
+<body>
+	<div id="wrapper">
+		<textarea id="left"></textarea>
+		<div id="center">
+			<a href="javascript:">把文字右移</a>
+			<p><span id="current">0</span>/<span id="all">0</span></p>
+				<ul id="process">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+		</div>
+		<div id="right"></div>
+	</div>
+</body>
+</html>

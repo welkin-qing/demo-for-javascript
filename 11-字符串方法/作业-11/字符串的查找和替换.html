@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>查找和替换</title>
+<style type="text/css">
+body,div,p{padding: 0;margin: 0;}
+span{background: yellow;}
+#wrap{width: 400px;height: 200px;border:5px solid #ccc;margin: 20px auto;padding: 10px;position: relative;}
+#buttons{
+    width: 90px;
+    height: 122px;
+    position: absolute;
+    left: 430px;
+    top: -5px;
+}
+#buttons a{
+	text-decoration: none;
+    margin-bottom: -16px;
+    color: #fff;
+    line-height: 30px;
+    background: #C0C0C0;
+    text-align: center;
+    font-size: 20px;
+    padding: 5px 10px;
+    border: 1px solid black;
+    display: none;
+    height: 30px;
+}
+#buttons a:hover {
+	background: #E76308;
+}
+#buttons a:first-child {
+	background: #94948C;
+	display: block;
+}
+#toolbox{
+	margin: -15px auto;
+    width: 380px;
+    height: 85px;
+    background: #ccc;
+    border: 5px solid #808080;
+    padding: 20px;
+    position: relative;
+    display: none;
+}
+#toolbox span{
+	padding: 5px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    background: #808080;
+    color: white;
+}
+#toolbox span.active {
+	background: #E73100;
+	color: #fff;
+}
+#close{    
+	width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 15px;
+    position: absolute;
+    left: 390px;
+    cursor: pointer;
+}
+#search{margin-top: 15px;display: none;}
+#search input{height: 22px;margin-right: 5px;line-height: 22px;}
+#replace{margin-top: 15px;display: none;}
+#replace input{height: 22px;margin-right: 5px;line-height: 22px;}
+</style>
+<script type="text/javascript">
+window.onload = function () {
+	var oBtn = document.getElementById('buttons');
+	var Aa = document.getElementsByTagName('a');
+	var oRep = document.getElementById('replace');
+	var oSer = document.getElementById('search');
+	var oTool = document.getElementById('toolbox');
+	var aSpan = oTool.getElementsByTagName('span');
+	var oClose = document.getElementById('close');
+	var oP = document.getElementsByTagName('p')[0];
+
+	Aa[0].onclick = function(){
+		for(var i=0;i<Aa.length;i++){
+			Aa[i].style.display = 'block';
+		}
+	}
+	function cleanshow () {
+		Aa[1].style.display = 'none';
+		Aa[2].style.display = 'none';
+		oTool.style.display = 'none';
+		oSer.style.display = 'none';
+		oRep.style.display = 'none';
+	}
+	Aa[1].onclick = function(){
+		cleanshow();
+		oTool.style.display = 'block';
+		oSer.style.display = 'block';
+	}
+	Aa[2].onclick = function(){
+		cleanshow();
+		oTool.style.display = 'block';
+		oRep.style.display = 'block';
+	}
+	oClose.onclick = function(){
+
+		oTool.style.display = 'none';
+	}
+	aSpan[0].onmouseover = aSpan[1].onmouseover = function(){
+		for(var i=0;i<aSpan.length;i++){
+			aSpan[i].className = '';
+		}
+		this.className = 'active';
+	}
+	aSpan[0].onmouseout = aSpan[1].onmouseout = function(){
+		for(var i=0;i<aSpan.length;i++){
+			aSpan[i].className = '';
+		}
+	}
+	aSpan[0].onclick = function(){
+		oRep.style.display = 'none';
+		oSer.style.display = 'block';
+	}
+	aSpan[1].onclick = function(){
+		oRep.style.display = 'block';
+		oSer.style.display = 'none';
+	}
+	//查找
+	var aInp = oSer.getElementsByTagName('input');
+	aInp[1].onclick = function(){
+		var str = aInp[0].value;
+		if(!str){
+			alert('输入不能为空！');
+		}
+		if(oP.innerHTML.indexOf('str') == -1){
+			alert('对不起，没有找到！');
+		}
+		oP.innerHTML = oP.innerHTML.split(str).join('<span>'+str+'</span>');
+	}
+	//替换
+	var bInp = oRep.getElementsByTagName('input');
+	bInp[2].onclick = function () {
+		var str = bInp[0].value;			// '妙味'
+		var newStr = bInp[1].value;
+		if (!str){
+			alert('输入不能为空！');
+		}
+		if(!newStr){
+			alert('请输入文字！');
+		}
+		if(oP.innerHTML.indexOf('str') == -1){
+			alert('对不起，没有找到！');
+		}
+		oP.innerHTML = oP.innerHTML.split(str).join(newStr);
+	};
+
+}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<p>妙味课堂是一支充满温馨并且极富人情味的IT培训团队；2010-2011年，妙味深度关注WEB前端开发领域，为此精心研发出一套灵活而充满趣味的JavaScript课程。2011-2013年，妙味精准研发出最新HTML5\CSS3课程，并推出远程培训课程方案，尝试将线下优良的培训模式移植到远程网络培训中，希望尽最大努力，将一种快乐愉悦的授课体验、结合HTML\CSS\JS知识点，精准传递给妙味课堂的每一位学员。</p>
+		<div id="buttons">
+			<a href="javascript:">展开</a></br>
+			<a href="javascript:">查找</a></br>
+			<a href="javascript:">替换</a>
+		</div>
+	</div>
+		<div id="toolbox">
+			<div id="close">x</div>
+			<span>查找</span>
+			<span>替换</span>
+			<div id="search">
+				<input type="text"><input type="button" value="查找">
+			</div>
+			<div id="replace">
+				<input type="text"><input type="text">
+				<input type="button" value="替换">
+			</div>
+		</div>
+</body>
+</html>
