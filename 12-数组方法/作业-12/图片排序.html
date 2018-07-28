@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>图片排序</title>
+<style type="text/css">
+body,ul,li,h2{padding: 0;margin: 0;}
+li{list-style: none;}
+img{width: 110px;height: 100px;margin: center;border: 1px solid darkcyan;}
+#btn{
+	background: #F1F1F1;
+    width: 1000px;
+    margin: 10px auto;
+    text-align: center;
+    height: 50px;
+}
+#btn li{
+	background: darkcyan;
+    width: 75px;
+    display: inline-block;
+    height: 20px;
+    padding: 5px;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+#btn li:hover{opacity: 0.5;}
+#showbox{
+	width: 980px;
+    background: #F1F1F1;
+    overflow: hidden;
+    padding: 10px;
+    margin: -10px auto;
+}
+#showbox li{
+	width: 110px;
+	float: left;
+	padding: 5px;
+	border: 1px solid 	#40E0D0;
+	background: #fff;
+}
+#showbox h1{
+	font-size: 16px;
+	font-weight: bold;
+	color: darkcyan;
+	text-align: center;
+	background: #f1f1f1;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var aBtn = document.getElementById('btn').getElementsByTagName('li');
+	var oShowbox = document.getElementById('showbox');
+	var aLi = oShowbox.getElementsByTagName('li');
+	var arr = [];
+	var str = '';
+	var flag = true;
+
+	for(var i=0;i<aLi.length;i++){
+		arr.push(aLi[i]);
+	}
+	aBtn[0].onclick = function(){
+		arr.reverse();  //颠倒数组元素
+		str = '';
+		for(var i=0;i<arr.length;i++){
+			str += '<li>' + arr[i].innerHTML + '</li>';
+		}
+		oShowbox.innerHTML = str;
+		this.innerHTML = flag ? '从小到大' : '从大到小';
+		flag = !flag;
+	}
+	aBtn[1].onclick = function(){
+		var arr2 = [];
+		for(var i=0;i<aLi.length;i++){
+			arr2.push(aLi[i]);
+		}
+		arr2.sort(function(a,b){
+			return Math.random() - 0.5;
+		})
+		str = '';
+		for(var i=0;i<arr2.length;i++){
+			str += '<li>' + arr2[i].innerHTML + '</li>';
+		}
+		oShowbox.innerHTML = str;
+	}
+}
+</script>
+<body>
+	<ul id="btn">
+		<li>从大到小</li>
+		<li>打乱顺序</li>
+	</ul>
+	<ul id="showbox">
+		<li>
+			<img src="img/qyc.jpg">
+			<h1>1-犬夜叉</h1>
+		</li>
+		<li>
+			<img src="img/al.jpg">
+			<h1>2-阿离</h1>
+		</li>
+		<li>
+			<img src="img/jg.jpg">
+			<h1>3-桔梗</h1>
+		</li>
+		<li>
+			<img src="img/zz.jpg">
+			<h1>4-猪猪</h1>
+		</li>
+		<li>
+			<img src="img/qe.jpg">
+			<h1>5-企鹅</h1>
+		</li>
+		<li>
+			<img src="img/nyz.jpg">
+			<h1>6-鸭子</h1>
+		</li>
+		<li>
+			<img src="img/yz.jpg">
+			<h1>7-鸭子</h1>
+		</li>
+		<li>
+			<img src="img/tt.jpg">
+			<h1>8-兔兔</h1>
+		</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>随机图片滚动</title>
+<style type="text/css">
+body,ul,li,img{padding: 0;margin: 0;}
+li{width:200px;height:180px;list-style: none;float:left;display: inline-block;overflow: hidden;position: relative;}
+img{width: 200px;height: 180px;border: 1px solid black;}
+ul{width:400px;margin: 20px auto;}
+div{position: absolute;top: 0;left: 0;}
+</style>
+<script src="miaov.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var aLi = document.getElementsByTagName('li');
+	var flag = 0;
+
+	for(var i=0;i<aLi.length;i++){
+		fnSlide(aLi[i]);
+	}
+
+	function fnSlide(li){
+		var oDiv = li.getElementsByTagName('div')[0];
+		function fnSlideOnce(){
+			setTimeout(function(){
+				flag = flag == 0 ? -185 : 0;
+				doMove(oDiv, 'top', 10, flag, fnSlideOnce);
+			}, Math.round(Math.random() *1000 + 1000))
+		}
+		fnSlideOnce();
+	}
+}
+</script>
+</head>
+<body>
+	<ul>
+		<li><div><img src="img/1.jpg"><img src="img/8.jpg"></div></li>
+		<li><div><img src="img/2.jpg"><img src="img/9.jpg"></div></li>
+		<li><div><img src="img/3.jpg"><img src="img/10.jpg"></div></li>
+		<li><div><img src="img/4.jpg"><img src="img/11.jpg"></div></li>
+		<li><div><img src="img/5.jpg"><img src="img/12.jpg"></div></li>
+		<li><div><img src="img/6.jpg"><img src="img/13.jpg"></div></li>
+		<li><div><img src="img/7.jpg"><img src="img/14.jpg"></div></li>
+		<li><div><img src="img/15.jpg"><img src="img/16.jpg"></div></li>
+	</ul>
+</body>
+</html>
