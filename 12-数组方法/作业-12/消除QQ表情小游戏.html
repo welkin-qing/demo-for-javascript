@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>消除QQ表情小游戏</title>
+<style>
+body,div,{padding: 0;margin: 0;}
+body{background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);}
+#alert{text-align: center;margin-top: 20px;}
+#box{
+	width:800px; 
+	height:450px; 
+	border:1px solid #066;
+	margin: 20px auto;
+	position: relative;
+	background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+#fraction{
+	width: 130px;
+    border: 1px solid #066;
+    background: #FFC;
+    padding: 10px;
+    position: absolute;
+    left: -152px;
+}
+#fraction p { margin:0; font-family:微软雅黑; font-size:16px; line-height:30px; }
+</style>
+<script src="miaov.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var oAlert = document.getElementById('alert');
+	var oBtn = oAlert.getElementsByTagName('input')[0];
+	var oBox = document.getElementById('box');
+	var oFraction = document.getElementById('fraction');
+	var aP = oFraction.getElementsByTagName('p');
+	var QQ = document.getElementById('qq');
+	var score = 0;
+	var lostPoints = 0;
+	var num = 1;  //第一个表情掉落的步长
+	var width = parseInt(getStyle(box, 'width'));
+	var height = parseInt(getStyle(box, 'height'));
+	var arrQQ = ['img/1.png', 'img/2.png', 'img/3.png', 'img/4.png', 'img/5.png', 'img/6.png', 'img/7.png', 'img/8.png', 'img/9.png', 'img/10.png', 'img/11.png'];
+
+	oBtn.onclick =createImg; 
+	function createImg(){
+		oBtn.disabled = true;  //如果使用该属性，则会禁用按钮。
+		oBtn.value = '游戏正在进行中.....'
+		var x = Math.round(Math.random() * (width - 24));  //0~width-24
+		var n = Math.floor(Math.random() * arrQQ.length);
+		//向下取整，即小于这个数的最大的那个整数。
+		var aImg = document.getElementsByTagName('img');
+		QQ.innerHTML = '<img style="filter:alpha(opacity:100); opacity:1; position:absolute; top:0px; left:' + x + 'px;" src="' + arrQQ[n] + '" />';
+		doMove(aImg[0], 'top', num, height - 24,function(){
+			aP[1].innerHTML = '失分：' + (++lostPoints) + '分';
+			if(lostPoints < 10){
+				shake(box,'top');
+				createImg();
+			}else{
+				//初始化
+				QQ.innerHTML = '';
+				alert('失败了~~重新开始吧！');
+				num = 1;
+                score = 0;
+                losePoints = 0;
+                aP[1].innerHTML = '失分：0 分';
+                aP[0].innerHTML = '得分：0 分';
+                oBtn.disabled = false;
+                oBtn.value = '开始游戏'
+			}
+		});
+		//点击到表情时
+		aImg[0].onmousedown = function(){
+			var that = this;
+			this.src = 'img/qq.png';
+			clearInterval(that.timer);
+			aP[0].innerHTML = '得分：' + (++score) + ' 分';
+			shake(that,'left',function(){
+				num++;
+				createImg();
+			});
+		}
+	}
+
+}
+</script>
+</head>
+<body>
+	<div id="alert">
+		<h2>你的鼠标有多快？</h2>
+		<p>游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去！！</p>
+		<input type="button" value="开始游戏" />
+	</div>
+	<div id="box">
+		<div id="fraction">
+			<p>得分：0 分</p>
+			<p>失分：0 分</p>
+		</div>
+		<div id="qq"></div>
+	</div>
+</body>
+</html>
