@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板可批量删除</title>
+<script type="text/javascript">
+window.onload = function(){
+	var oText = document.getElementById('text1');
+ 	var oBtn = document.getElementById('btn');
+ 	var oDel = document.getElementById('btn1');
+ 	var oUl = document.getElementById('ul1')
+ 	var flag = true;
+
+ 	oBtn.onclick = function(){
+ 		if(!oText.value){
+ 			return;
+ 		}
+ 		var oLi = document.createElement('li');  //创建li节点
+ 		oLi.innerHTML = oText.value;   //li的内容
+ 		//插入li
+ 		if( oUl.children[0] ){
+ 			oUl.insertBefore(oLi, oUl.children[0]);
+ 		}else{
+ 			oUl.appendChild(oLi);
+ 		}
+ 		oText.value = '';
+
+ 		for(var i=0;i<oUl.children.length;i++){
+ 			oUl.children[i].onclick = function(){
+ 				if(flag){
+ 					this.mark = 1;
+ 					this.style.background = 'yellow';
+ 					flag = !flag;
+ 				}else{
+ 					this.mark = '';
+ 					this.style.background = '';
+ 					flag = !flag;
+ 				}
+ 			}
+ 		}
+
+ 	}
+
+ 	oDel.onclick = function(){
+ 		for(var i=0;i<oUl.children.length;i++){
+ 			if(oUl.children[i].mark){
+ 				oUl.removeChild(oUl.children[i]);
+ 				i--;//若没有这一步，同时删除最后两个时会有问题
+ 			}
+ 		}
+ 	}
+}
+</script>
+</head>
+<body>
+	<input type="text" id='text1' /><input type="button" value="留言" id="btn" /><input type="button" value="批量删除" id="btn1" />
+	<ul id="ul1"></ul>
+</body>
+</html>
