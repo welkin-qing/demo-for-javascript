@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>数组操作+弹出层提示</title>
+<style type="text/css">
+body,ul{margin: 0;padding: 0;}
+body{font-size: 14px;}
+li{list-style: none;}
+#container{width: 1000px;margin: 40px auto;}
+#header{height: 35px; border-bottom: 2px solid #EE7510;}
+#header li{
+	float: left; 
+	padding: 0 10px; 
+	margin-right: 5px;
+	height: 35px;
+	line-height: 35px; 
+	font-size: 18px; 
+	cursor: pointer;
+}
+#header li.focus {
+	background-color: #EE7510;
+	color: white; font-weight: bold;
+}
+.list {margin-top: 5px;}
+.list li {
+	position: relative;
+	height: 35px;
+	line-height: 35px; font-size: 16px;
+}
+.list li a {
+	display : inline-block;
+	height: 35px;
+}
+.list .date {
+	position: absolute; right: 0;
+	line-height: 35px;
+}
+#tips {
+	padding: 5px; 
+	position: absolute; 
+	left: 0px; 
+	top: 0px;
+	width: 400px; 
+	height: 200px; 
+	display: none;
+	border: 2px solid #FF7700; 
+	background-color: white;
+}
+#tips li.col {
+	width: 180px; 
+	height: 30px; 
+	float: left;
+	line-height: 30px; 
+	border-bottom: 1px solid #CCC;
+}
+#arrow {
+	position: absolute;
+	left: -11px; 
+	top: 120px;
+	width: 11px; 
+	height: 17px; 
+	background: url("img/arrow.png") no-repeat;
+}
+</style>
+<script src="data.js"></script>
+<script src="my.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	var oHeader = document.getElementById('header');
+	var oListContent = document.getElementById('listContent');
+	var oTips = document.getElementById('tips');
+	var oTpc = document.getElementById('tipsContent');
+
+	//生成一级标题
+	for(var i=0;i<data.length;i++){
+		var oLi = document.createElement('li'); //创造li
+		oLi.innerHTML = data[i].name;
+		oHeader.appendChild(oLi);
+	}
+	//页面初始一级标题高亮状态
+	oHeader.children[0].className = 'focus';
+	//生成二级标题的函数
+	function addTitle(index){
+		var oUl = document.createElement("ul");
+		for(var i=0;i<data[index].list.length;i++){
+			var oLi = document.createElement('li');
+			oLi.innerHTML = '<a href="javascript:;">' + data[index].list[i].title + '</a>';
+			oUl.appendChild(oLi);
+		}
+		oListContent.innerHTML = '';
+		oListContent.appendChild(oUl);
+		oUl.className = 'list';
+	}
+	addTitle(0);
+	showTitle(0);
+
+	//生成二级标题的操作
+	for(var i=0;i<oHeader.children.length;i++){
+		oHeader.children[i].index = i;
+		oHeader.children[i].onclick = function(){
+			//更改一级标题样式
+			for(var i=0;i<oHeader.children.length;i++){
+				oHeader.children[i].className = '';
+			}
+			this.className = 'focus';
+			addTitle(this.index);
+			showTitle(this.index);
+		}
+	}
+
+	//生成悬浮窗的函数
+	function showTips(title){
+		//确定悬浮窗的位置
+		var pos = getPos(title);
+		if(pos.top - 120 > document.body.scrollTop + document.documentElement.clientHeight - 220) {
+			oTips.style.top = document.body.scrollTop + document.documentElement.clientHeight - 220 + 'px';
+		} else {
+			oTips.style.top = pos.top - 120 + 'px';
+		}
+
+		if(pos.top - 120 < document.body.scrollTop){
+			oTips.style.top = document.body.scrollTop + 10 + 'px';
+		}
+		oTips.style.left = pos.left + title.offsetWidth + 20 + 'px';
+	}
+
+	//生成悬浮窗中的内容的函数
+
+	function tipsContent(m, n){
+		oTpc.innerHTML = '';
+		var oUl = document.createElement('ul');
+		var str = '<li><h2>' + data[m].list[n].company + '</h2></li><li class="col"><span style="font-weight: bold">职位：</span><span>' + data[m].list[n].position + '</span></li><li class="col"><span style="font-weight: bold">招聘人数：</span><span>' + data[m].list[n].recruitingNumbers + '</span></li><li class="col"><span style="font-weight: bold">工作地点：</span><span>' + data[m].list[n].workingLocation + '</span></li><li class="col"><span style="font-weight: bold">工作经历：</span><span>' + data[m].list[n].workExperience + '</span></li><li class="col"><span style="font-weight: bold">学历：</span><span>' + data[m].list[n].education + '</span></li><li class="col"><span style="font-weight: bold">薪资：</span><span>' + data[m].list[n].wage + '</span></li>';
+
+        oUl.innerHTML = str;
+        oTpc.appendChild(oUl);
+	}
+
+	// 鼠标悬浮事件函数
+	function showTitle(idx){
+		var oList = oListContent.getElementsByTagName('ul')[0],
+			aTitle = oList.getElementsByTagName('a');
+		for(var i=0; i<aTitle.length; i++){
+			aTitle[i].index = i;
+			aTitle[i].onmouseover = function(){	
+				oTips.style.display = 'block';
+				showTips(this);
+				tipsContent(idx, this.index);
+			}
+			aTitle[i].onmouseout = function(){
+				oTips.style.display = 'none';
+			}
+		}
+	}
+
+
+
+
+
+}
+</script>
+</head>
+<body>
+	<div id="container">
+		<ul id="header"></ul>
+		<div id="listContent"></div>
+	</div>
+	<div id="tips">
+		<span id="arrow"></span>
+		<div id="tipsContent"></div>
+	</div>
+</body>
+</html>

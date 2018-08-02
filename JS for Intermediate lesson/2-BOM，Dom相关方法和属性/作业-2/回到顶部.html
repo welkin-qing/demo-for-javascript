@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>回到顶部</title>
+<style type="text/css">
+body{padding: 0;margin: 0;}
+#wrapper{background: yellow;height: 2000px;position: relative;}
+#toTop{width: 100px;height: 100px;background: red;color: white;line-height: 100px;position: absolute;bottom: 0;right: 0;text-align: center;cursor: pointer;}
+</style>
+<script type="text/javascript">
+window.onload = function() {
+	var oBtn = document.getElementById('toTop');
+
+	oBtn.onclick = function(){
+		if(oBtn.flag){
+			return;
+		}
+		oBtn.flag = true;
+		//开一个定时器，每次都往上移40px，当等于0时关闭定时器
+		oBtn.timer = setInterval(function(){
+			var top = (document.documentElement.scrollTop -40) > 0 ? (document.documentElement.scrollTop -40) : 0;
+			document.documentElement.scrollTop = top;
+			if(top ==0){
+				clearInterval(oBtn.timer);
+				oBtn.flag = false;
+			}
+		},20)
+	}
+}
+</script>
+</head>
+<body>
+	<div id="wrapper">
+		<span id="toTop">回到顶部</span>
+	</div>
+</body>
+</html>
