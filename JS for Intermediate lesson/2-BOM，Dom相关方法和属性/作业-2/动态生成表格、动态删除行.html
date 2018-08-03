@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>动态生成表格、动态删除行</title>
+<style type="text/css">
+#form1{
+	width: 480px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin: 30px auto;
+	padding: 10px;
+	line-height: 30px;
+	position: relative;
+}
+input[type="button"]{
+	position: absolute;
+	bottom: 4px;
+	right: 10px;
+}
+#tab1{
+	width: 500px;
+	margin: 10px auto;
+	border-collapse: collapse;/*为表格设置合并边框模型*/
+}
+th,td{border: 1px solid #000;padding: 5px;}
+tr{cursor: pointer;}
+tbody tr td{text-align: center;}
+#div1{
+	position: relative;
+	width: 480px;
+	padding: 10px;
+	margin: 0 auto;
+}
+input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+}
+</style>
+<script src="my.js"></script>
+<script>
+window.onload = function() {
+	var data = [
+				{'name': '赵一', 'sex': '男', 'age': '35'},
+				{'name': '钱二', 'sex': '女', 'age': '28'},
+				{'name': '孙三', 'sex': '男', 'age': '15'},
+				{'name': '李四', 'sex': '男', 'age': '48'},
+				{'name': '周五', 'sex': '男', 'age': '36'},
+				{'name': '武六', 'sex': '女', 'age': '49'},
+				{'name': '郑七', 'sex': '女', 'age': '75'},
+				{'name': '王九', 'sex': '男', 'age': '17'},
+			];
+	var oForm = document.getElementById('form1');
+	var oTab = document.getElementById('tab1');
+	var oCheckAll = document.getElementById('checkAll');
+	var oDel = document.getElementById('del');
+	var oTbody = oTab.tBodies[0];
+	var oThead = oTab.tHead;
+
+	//将数据放入表格
+	for(var i=0;i<data.length;i++){
+		var oTr = document.createElement('tr');
+
+		var oTd = document.createElement('td');
+		oTd.innerHTML = '<input type="checkbox" />';
+		oTr.appendChild(oTd);
+
+		var oTd = document.createElement('td');
+		oTd.innerHTML = data[i].name;
+		oTr.appendChild(oTd);
+
+		var oTd = document.createElement('td');
+		oTd.innerHTML = data[i].sex;
+		oTr.appendChild(oTd);
+
+		var oTd = document.createElement('td');
+		oTd.innerHTML = data[i].age;
+		oTr.appendChild(oTd);
+
+		oTbody.appendChild(oTr);
+		colorLine();
+	}
+	function colorLine(){
+		for(var i=0; i<oTbody.rows.length; i++){
+			if(i%2){
+				oTbody.rows[i].style.background = '#EDF3FA';
+			} else {
+				oTbody.rows[i].style.background = '#fff';
+			}
+		}
+	}
+
+	//实现删除
+	oDel.onclick = function(){
+		oCheckAll.checked = false;
+		for(var i=0;i<oTbody.rows.length;i++){
+			if(oTbody.rows[i].cells[0].children[0].checked){
+				oTbody.removeChild(oTbody.rows[i]);
+				i--;
+			}
+		}
+		colorLine();
+	}
+	//实现添加
+	oForm.add.onclick = function(){
+		var arr = [];
+		arr[0] = oForm.name.value;
+		arr[1] = getChecked(oForm, 'sex');
+		arr[2] = oForm.age.value;
+		for(var i=0;i<arr.length;i++){
+			if(!arr[i]){
+				alert('您有项目没有填！');
+				return;
+			}
+		}
+
+		var oTr = document.createElement('tr');
+
+		var oTd = document.createElement('td');
+		oTd.innerHTML = '<input type="checkbox" />';
+		oTr.appendChild(oTd);
+		for(var i=0;i<arr.length;i++){
+			var oTd = document.createElement('td');
+			oTd.innerHTML = arr[i];
+			oTr.appendChild(oTd);
+		}
+		oTbody.appendChild(oTr);
+		colorLine();
+		oForm.reset();
+		checkbox();
+	}
+
+	function checkbox(){
+		for(var i=0; i<oTbody.rows.length; i++){
+			oTbody.rows[i].onclick = function(){
+				this.cells[0].children[0].checked = this.cells[0].children[0].checked == false ? true : false;
+				check();
+			}
+			oTbody.rows[i].cells[0].children[0].onclick = function(){
+				this.checked = this.checked == false ? true : false;
+				check();
+			}
+		}
+		oTab.tHead.onclick = function(){
+			oCheckAll.checked = oCheckAll.checked == false ? true : false;
+			checkAll();
+		}
+		function checkAll(){
+			for(var i=0; i<oTbody.rows.length; i++){
+				oTbody.rows[i].cells[0].children[0].checked = oCheckAll.checked;
+			}
+		}
+		function check(){
+			for(var i=0; i<oTbody.rows.length; i++){
+				if(!oTbody.rows[i].cells[0].children[0].checked){
+					oCheckAll.checked = false;
+					return;
+				}
+
+			}
+			oCheckAll.checked = true;
+		}
+	}
+	oCheckAll.onclick=function(){
+		for(var i=0; i<oTbody.rows.length; i++){
+				oTbody.rows[i].cells[0].children[0].checked = oCheckAll.checked;
+			}
+	}
+
+}
+</script>
+</head>
+<body>
+	<form id="form1">
+		请输入姓名：<input type="text" name="name"><br>
+		请选择性别：<input type="radio" name="sex" value="男">男<input type="radio" name="sex" value="女">女<br>
+		请输入年龄：<input type="text" name="age"><br>
+		<input type="button" value="添加到表格" name="add">
+	</form>
+	<table id="tab1">
+		<thead>
+			<tr>
+				<th width="20%"><input type="checkbox" id="checkAll"/>全选</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<div id="div1">
+		<input type="button" value="删除所选行" id="del">
+	</div>
+</body>
+</html>

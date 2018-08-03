@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>优酷弹窗</title>
+<style type="text/css">
+body{padding: 0;margin: 0;position:relative;}
+#mask{background: #999;width: 100%;height: 2000px;position: absolute;top: 0;opacity: 0.4;display: none;}
+#box{
+	width: 300px;
+	height: 200px;
+	border: 5px solid black;
+	padding: 10px;
+	position: fixed;
+	left: calc(50% - 150px);
+	top: calc(50% - 100px);
+	text-align: center;
+	display: none;
+	background: white;
+}
+#close{width: 20px;height: 20px;line-height: 20px;float: right;text-decoration: none;color: black;}
+#close:hover{background: red;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oBtn = document.getElementById('btn');
+	var oMask = document.getElementById('mask');
+	var oBox = document.getElementById('box');
+	var oClose = document.getElementById('close');
+
+	oBtn.onclick = function(){
+		oMask.style.display = 'block';
+		oBox.style.display = 'block';
+	}
+	oClose.onclick = function(){
+		oMask.style.display = 'none';
+		oBox.style.display = 'none';
+	}
+}
+</script>
+</head>
+<body style="height:2000px;">
+	<input type="button" value="登陆" id="btn" />
+    <div id="mask"></div>
+    <div id="box">
+    	<a href="javascript:;" id="close">×</a>
+        这里是登陆的表单等内容
+    </div>
+</body>
+</html>

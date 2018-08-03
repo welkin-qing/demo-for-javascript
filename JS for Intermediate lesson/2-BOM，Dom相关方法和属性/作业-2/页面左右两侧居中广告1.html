@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>页面左右两侧居中广告</title>
+<style type="text/css">
+body{margin: 0;padding: 0;}
+#wrapper{height: 2000px;}
+.ad {height: 200px;width: 60px;background: red;position: absolute;}		
+.left {left: 0;}
+.right {right: 0;}
+</style>
+<script src="my.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var aAd = getClass(document, 'div', 'ad');
+
+	function atMiddle(){
+ 		for(var i=0;i<aAd.length;i++){
+ 			//广告的top值=滚动的距离+可视区高/2-广告的文档高度/2
+ 			aAd[i].style.top = document.documentElement.scrollTop + document.documentElement.clientHeight/2 - aAd[i].offsetHeight/2 + 'px';
+ 		}
+	}
+	atMiddle();
+	window.onscroll = atMiddle;
+	window.onresize = atMiddle;  //调整当前窗口
+}
+</script>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="ad left"></div>
+		<div class="ad right"></div>
+	</div>
+</body>
+</html>
