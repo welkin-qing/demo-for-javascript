@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>鼠标绘制方块</title>
+<style>
+body,p{padding: 0;margin: 0;}
+#container{
+	width: 700px;
+	height: 500px;
+	border: 1px solid darkcyan;
+	margin: 20px auto;
+	position: relative;
+}
+#container div{position: absolute;}
+p{text-align: center;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oDiv = document.getElementById('container');
+
+	oDiv.onmousedown = function( ev ){
+		var ev = ev || event;
+		//鼠标到元素的位置
+		var L1 = ev.clientX - oDiv.offsetLeft;
+		var T1 = ev.clientY - oDiv.offsetTop;
+		var oAddedDiv = document.createElement('div');
+
+		//设置全局捕获
+		if(oDiv.setCapture){
+			oDiv.setCapture();
+		}
+		//添加方块
+		oDiv.appendChild(oAddedDiv);
+
+		document.onmousemove = function(ev){
+			var ev = ev || event;
+			var L2 = ev.clientX - oDiv.offsetLeft;
+			var T2 = ev.clientY - oDiv.offsetTop;
+			L2 = L2 < 0 ? 0 : L2;
+			L2 = L2 > oDiv.clientWidth ? oDiv.clientWidth : L2;
+			T2 = T2 < 0 ? 0 : T2;
+			T2 = T2 > oDiv.clientHeight ? oDiv.clientHeight : T2;
+
+			oAddedDiv.style.cssText = 'border: 1px solid red;';
+			//确定div的位置
+			oAddedDiv.style.left = L1 > L2 ? (L2 + 'px') : (L1 + 'px');
+			oAddedDiv.style.top = T1 > T2 ? (T2 + 'px') : (T1 + 'px');
+			//确定div 的大小 abs返回绝对值
+			oAddedDiv.style.width = Math.abs(Math.abs(L1 - L2) - 2) + 'px';
+			oAddedDiv.style.height = Math.abs(Math.abs(T1 - T2) - 2) + 'px';
+		}
+		document.onmouseup = function(){
+			document.onmousemove = document.onmouseup = null;
+			if(oDiv.releaseCapture){
+				oDiv.releaseCapture();
+			}
+		}
+		return false;
+	}
+}
+</script>
+</head>
+<body>
+	<div id="container"></div>
+	<p>可以在上面的方框中任意拉出方块</p>
+</body>
+</html>
